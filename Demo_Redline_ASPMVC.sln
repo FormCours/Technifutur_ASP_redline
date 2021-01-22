@@ -11,6 +11,8 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Demo_Redline_ASPMVC.DbProje
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo_Redline_ASPMVC.ConsommationDAL", "Demo_Redline_ASPMVC.ConsommationDAL\Demo_Redline_ASPMVC.ConsommationDAL.csproj", "{94D9A44F-70B9-40DE-877C-22C10A5C74BD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Toolbox", "Toolbox\Toolbox.csproj", "{96571B8F-0810-4B08-AD91-5789EC1DA89D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,10 @@ Global
 		{94D9A44F-70B9-40DE-877C-22C10A5C74BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{94D9A44F-70B9-40DE-877C-22C10A5C74BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{94D9A44F-70B9-40DE-877C-22C10A5C74BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96571B8F-0810-4B08-AD91-5789EC1DA89D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96571B8F-0810-4B08-AD91-5789EC1DA89D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96571B8F-0810-4B08-AD91-5789EC1DA89D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96571B8F-0810-4B08-AD91-5789EC1DA89D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
