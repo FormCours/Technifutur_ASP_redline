@@ -6,24 +6,63 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Toolbox.Database;
 
 namespace Demo_Redline_ASPMVC.DAL.Repositories
 {
+    /*
     public class GenreRepository : IRepository<long, Genre>
     {
         // Se connecter la DB
-        ConnectDB conector;
         private string _ConnectionString;
 
         public GenreRepository()
         {
-            conector = new ConnectDB(_ConnectionString);
-
             _ConnectionString = @"Server=DESKTOP-CE6MM13\SQLEXPRESS;Database=Demo_Redline_ASPMVC;Trusted_Connection=True;";
         }
 
         // Méthode du CRUD
+
+        #region Premiere version du GetGall
+        //public IEnumerable<Genre> GetAll()
+        //{
+        //    // Pour se connecter à SLQ server
+        //    SqlConnection connection = new SqlConnection(_ConnectionString);
+
+        //    // Creation de la commande SQL
+        //    SqlCommand command = connection.CreateCommand();
+
+        //    command.CommandType = System.Data.CommandType.Text;
+        //    command.CommandText = "SELECT Id_Genre, Name FROM genre;";
+
+        //    // Ouverture de la connexion
+        //    connection.Open();
+
+        //    // Execution de la requete pour obtenir un "reader" => Col/Row
+        //    SqlDataReader reader = command.ExecuteReader();
+
+        //    // Parcours des données de la requete
+        //    List<Genre> genres = new List<Genre>();
+        //    while(reader.Read())
+        //    {
+        //        // Recuperation des données de la Row
+        //        long idGenre = (long)reader["Id_Genre"];
+        //        string name = reader["Name"].ToString();
+
+        //        genres.Add(new Genre(idGenre, name));
+        //    }
+
+        //    // On ferme de reader et la commande
+        //    reader.Close();
+        //    command.Dispose();
+
+        //    // Fermeture de la connexion
+        //    connection.Close();
+        //    connection.Dispose();
+
+        //    return genres;
+        //}
+        #endregion
+        #region Seconde version du GetAll avec "using"
         public IEnumerable<Genre> GetAll()
         {
             // Pour se connecter à SLQ server
@@ -57,6 +96,7 @@ namespace Demo_Redline_ASPMVC.DAL.Repositories
                 }
             }
         }
+        #endregion
 
         public Genre Get(long key)
         {
@@ -150,20 +190,25 @@ namespace Demo_Redline_ASPMVC.DAL.Repositories
 
         public bool Delete(long key)
         {
-            QueryDB query = new QueryDB("DELETE FROM Genre WHERE Id_Genre = @id;");
-            query.AddParametre("@id", key);
+            using(SqlConnection connection = new SqlConnection(_ConnectionString))
+            {
+                using(SqlCommand command = connection.CreateCommand())
+                {
+                    command.CommandType = System.Data.CommandType.Text;
+                    command.CommandText = "DELETE FROM Genre WHERE Id_Genre = @id;";
 
-            int nbRow = conector.ExecuteNonQuery(query);
-            return (nbRow == 1);
-        }
+                    SqlParameter paramId = new SqlParameter("@id", key);
+                    command.Parameters.Add(paramId);
 
-        public int GetNumberOfGenre()
-        {
-            QueryDB query = new QueryDB("SELECT COUNT(*) FROM Genre;");
+                    connection.Open();
 
-            int nbGenre = (int)conector.ExecuteScalar(query);
-            return nbGenre;
+                    int nbRow = command.ExecuteNonQuery();
+
+                    return (nbRow == 1);
+                }
+            }
         }
 
     }
+    */
 }
