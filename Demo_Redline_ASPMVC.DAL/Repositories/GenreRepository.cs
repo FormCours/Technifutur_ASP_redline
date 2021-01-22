@@ -113,14 +113,15 @@ namespace Demo_Redline_ASPMVC.DAL.Repositories
 
                     using(SqlDataReader reader = command.ExecuteReader())
                     {
+                        Genre genre = null;
                         if (reader.Read())
                         {
-                            return new Genre(
+                            genre = new Genre(
                                 (long)reader["Id_Genre"],
                                 reader["Name"].ToString()
                             );
                         }
-                        return null;
+                        return genre;
                     }
                 }
             }
