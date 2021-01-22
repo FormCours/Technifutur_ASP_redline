@@ -12,16 +12,16 @@ namespace Demo_Redline_ASPMVC.DAL.Repositories
         where TEntity: IEntity<TKey>
     {
         // - Create
-        TEntity insert(TEntity entity);
+        TEntity Insert(TEntity entity);
 
         // - Read
-        TEntity get(TKey key);
-        IEnumerable<TEntity> getAll();
+        TEntity Get(TKey key);
+        IEnumerable<TEntity> GetAll();
 
         // - Update
-        TEntity update(TKey key, TEntity entity);
+        TEntity Update(TKey key, TEntity entity);
 
         // - Delete
-        bool delete(TKey key);
+        bool Delete(TKey key);
     }
 }

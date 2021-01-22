@@ -20,7 +20,9 @@ namespace Demo_Redline_ASPMVC.DAL.Repositories
         }
 
         // Méthode du CRUD
-        public IEnumerable<Genre> getAll()
+
+        #region Premiere version du GetGall
+        public IEnumerable<Genre> GetAll()
         {
             // Pour se connecter à SLQ server
             SqlConnection connection = new SqlConnection(_ConnectionString);
@@ -58,27 +60,27 @@ namespace Demo_Redline_ASPMVC.DAL.Repositories
 
             return genres;
         }
+        #endregion
 
 
 
 
-
-        public bool delete(long key)
+        public bool Delete(long key)
         {
             throw new NotImplementedException();
         }
 
-        public Genre get(long key)
+        public Genre Get(long key)
         {
             throw new NotImplementedException();
         }
 
-        public Genre insert(Genre entity)
+        public Genre Insert(Genre entity)
         {
             throw new NotImplementedException();
         }
 
-        public Genre update(long key, Genre entity)
+        public Genre Update(long key, Genre entity)
         {
             throw new NotImplementedException();
         }
