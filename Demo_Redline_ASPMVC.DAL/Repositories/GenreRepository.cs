@@ -97,14 +97,40 @@ namespace Demo_Redline_ASPMVC.DAL.Repositories
         }
         #endregion
 
+        public Genre Get(long key)
+        {
+            using(SqlConnection connection = new SqlConnection(_ConnectionString))
+            {
+                using (SqlCommand command = connection.CreateCommand())
+                {
+                    command.CommandType = System.Data.CommandType.Text;
+                    command.CommandText = $"SELECT Id_Genre, Name FROM Genre WHERE Id_Genre = @id";
+
+                    SqlParameter paramKey = new SqlParameter("@id", key);
+                    command.Parameters.Add(paramKey);
+
+                    connection.Open();
+
+                    using(SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            return new Genre(
+                                (long)reader["Id_Genre"],
+                                reader["Name"].ToString()
+                            );
+                        }
+                        return null;
+                    }
+                }
+            }
+        }
+
+
+
 
 
         public bool Delete(long key)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Genre Get(long key)
         {
             throw new NotImplementedException();
         }
