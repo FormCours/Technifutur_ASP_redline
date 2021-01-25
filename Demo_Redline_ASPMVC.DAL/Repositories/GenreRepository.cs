@@ -10,19 +10,9 @@ using Toolbox.Database;
 
 namespace Demo_Redline_ASPMVC.DAL.Repositories
 {
-    public class GenreRepository : IRepository<long, Genre>
+    public class GenreRepository : RepositoryBase<long, Genre>
     {
-        // Se connecter la DB
-        ConnectDB conector;
-        private string _ConnectionString;
-
-        public GenreRepository()
-        {
-            _ConnectionString = @"Server=DESKTOP-CE6MM13\SQLEXPRESS;Database=Demo_Redline_ASPMVC;Trusted_Connection=True;";
-            conector = new ConnectDB(_ConnectionString);
-        }
-
-        private Genre ConvertReaderToGenre(SqlDataReader dataReader)
+        protected override Genre ConvertReaderToEntity(SqlDataReader dataReader)
         {
             return new Genre(
                 (long)dataReader["Id_Genre"],
@@ -31,7 +21,7 @@ namespace Demo_Redline_ASPMVC.DAL.Repositories
         }
 
         // Méthode du CRUD
-        public IEnumerable<Genre> GetAll()
+        public override IEnumerable<Genre> GetAll()
         {
             QueryDB query = new QueryDB("SELECT Id_Genre, Name FROM genre;");
 
@@ -40,18 +30,18 @@ namespace Demo_Redline_ASPMVC.DAL.Repositories
             //    dataReader["Name"].ToString()
             //);
 
-            return conector.ExecuteReader<Genre>(query, ConvertReaderToGenre);
+            return Connector.ExecuteReader<Genre>(query, ConvertReaderToEntity);
         }
 
-        public Genre Get(long key)
+        public override Genre Get(long key)
         {
             QueryDB query = new QueryDB("SELECT Id_Genre, Name FROM Genre WHERE Id_Genre = @id");
             query.AddParametre("@id", key);
 
-            return conector.ExecuteReader(query, ConvertReaderToGenre).SingleOrDefault();
+            return Connector.ExecuteReader(query, ConvertReaderToEntity).SingleOrDefault();
         }
 
-        public Genre Insert(Genre entity)
+        public override Genre Insert(Genre entity)
         {
             string sql = "INSERT INTO [Genre] (Name)"
                         + " OUTPUT inserted.Id_Genre, inserted.Name"
@@ -60,10 +50,10 @@ namespace Demo_Redline_ASPMVC.DAL.Repositories
             QueryDB query = new QueryDB(sql);
             query.AddParametre("@name", entity.Name);
 
-            return conector.ExecuteReader(query, ConvertReaderToGenre).SingleOrDefault();
+            return Connector.ExecuteReader(query, ConvertReaderToEntity).SingleOrDefault();
         }
 
-        public Genre Update(long key, Genre entity)
+        public override Genre Update(long key, Genre entity)
         {
             string sql = "UPDATE Genre"
                         + " SET [Name] = @name"
@@ -74,15 +64,15 @@ namespace Demo_Redline_ASPMVC.DAL.Repositories
             query.AddParametre("@id", entity.Id);
             query.AddParametre("@name", entity.Name);
 
-            return conector.ExecuteReader(query, ConvertReaderToGenre).SingleOrDefault();
+            return Connector.ExecuteReader(query, ConvertReaderToEntity).SingleOrDefault();
         }
 
-        public bool Delete(long key)
+        public override bool Delete(long key)
         {
             QueryDB query = new QueryDB("DELETE FROM Genre WHERE Id_Genre = @id;");
             query.AddParametre("@id", key);
 
-            int nbRow = conector.ExecuteNonQuery(query);
+            int nbRow = Connector.ExecuteNonQuery(query);
             return (nbRow == 1);
         }
 
@@ -90,9 +80,8 @@ namespace Demo_Redline_ASPMVC.DAL.Repositories
         {
             QueryDB query = new QueryDB("SELECT COUNT(*) FROM Genre;");
 
-            int nbGenre = (int)conector.ExecuteScalar(query);
+            int nbGenre = (int)Connector.ExecuteScalar(query);
             return nbGenre;
         }
-
     }
 }
