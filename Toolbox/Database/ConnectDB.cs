@@ -69,7 +69,7 @@ namespace Toolbox.Database
                     connection.Open();
 
                     object o = command.ExecuteScalar();
-                    return (o == DBNull.Value) ? null : o;
+                    return (o is DBNull) ? null : o;
                 }
             }
         } 
@@ -89,16 +89,14 @@ namespace Toolbox.Database
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
                         // Parcours des données de la requete
-                        List<TEntity> entities = new List<TEntity>();
                         while (reader.Read())
                         {
                             // Recuperation des données de la Row
                             TEntity entity = dataToEntity(reader); // In  => SqlDataReader / Out => TEntity
 
-                            entities.Add(entity);
+                            // Renvoyer les données en mode différé
+                            yield return entity;
                         }
-
-                        return entities;
                     }
                 }
             }
