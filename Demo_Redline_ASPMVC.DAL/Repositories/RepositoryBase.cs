@@ -1,6 +1,7 @@
 ﻿using Demo_Redline_ASPMVC.DAL.Entities;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -22,7 +23,8 @@ namespace Demo_Redline_ASPMVC.DAL.Repositories
 
         public RepositoryBase()
         {
-            _ConnectionString = @"Server=DESKTOP-CE6MM13\SQLEXPRESS;Database=Demo_Redline_ASPMVC;Trusted_Connection=True;";
+            // Recuperation de la valeur de la ConnectionString depuis les fichiers de config de l'app !
+            _ConnectionString = ConfigurationManager.ConnectionStrings["db-source"].ConnectionString;
             _Connector = new ConnectDB(_ConnectionString);
         }
 
