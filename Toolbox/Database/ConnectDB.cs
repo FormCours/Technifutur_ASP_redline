@@ -74,6 +74,34 @@ namespace Toolbox.Database
             }
         } 
 
-        // TODO: public IEnumerable<...> ExecuteReader (...)
+        public IEnumerable<TEntity> ExecuteReader<TEntity>(QueryDB query, Func<SqlDataReader, TEntity> dataToEntity)
+        {
+            // Pour se connecter à SLQ server
+            using (SqlConnection connection = createConnection())
+            {
+                // Creation de la commande SQL
+                using (SqlCommand command = createCommand(connection, query))
+                {
+                    // Ouverture de la connexion
+                    connection.Open();
+
+                    // Execution de la requete pour obtenir un "reader" => Col/Row
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        // Parcours des données de la requete
+                        List<TEntity> entities = new List<TEntity>();
+                        while (reader.Read())
+                        {
+                            // Recuperation des données de la Row
+                            TEntity entity = dataToEntity(reader); // In  => SqlDataReader / Out => TEntity
+
+                            entities.Add(entity);
+                        }
+
+                        return entities;
+                    }
+                }
+            }
+        }
     }
 }
