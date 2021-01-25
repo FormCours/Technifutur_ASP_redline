@@ -43,96 +43,38 @@ namespace Demo_Redline_ASPMVC.DAL.Repositories
             return conector.ExecuteReader<Genre>(query, ConvertReaderToGenre);
         }
 
-        // TODO: Simplifier les méthodes Get, Insert et Update !
-
         public Genre Get(long key)
         {
-            using (SqlConnection connection = new SqlConnection(_ConnectionString))
-            {
-                using (SqlCommand command = connection.CreateCommand())
-                {
-                    command.CommandType = System.Data.CommandType.Text;
-                    command.CommandText = $"SELECT Id_Genre, Name FROM Genre WHERE Id_Genre = @id";
+            QueryDB query = new QueryDB("SELECT Id_Genre, Name FROM Genre WHERE Id_Genre = @id");
+            query.AddParametre("@id", key);
 
-                    SqlParameter paramKey = new SqlParameter("@id", key);
-                    command.Parameters.Add(paramKey);
-
-                    connection.Open();
-
-                    using (SqlDataReader reader = command.ExecuteReader())
-                    {
-                        Genre genre = null;
-                        if (reader.Read())
-                        {
-                            genre = new Genre(
-                                (long)reader["Id_Genre"],
-                                reader["Name"].ToString()
-                            );
-                        }
-                        return genre;
-                    }
-                }
-            }
+            return conector.ExecuteReader(query, ConvertReaderToGenre).SingleOrDefault();
         }
 
         public Genre Insert(Genre entity)
         {
-            using (SqlConnection connection = new SqlConnection(_ConnectionString))
-            {
-                using (SqlCommand command = connection.CreateCommand())
-                {
-                    command.CommandType = System.Data.CommandType.Text;
-                    command.CommandText = "INSERT INTO [Genre] (Name)"
-                                        + " OUTPUT inserted.Id_Genre, inserted.Name"
-                                        + " VALUES (@name)";
+            string sql = "INSERT INTO [Genre] (Name)"
+                        + " OUTPUT inserted.Id_Genre, inserted.Name"
+                        + " VALUES (@name)";
 
-                    command.Parameters.AddWithValue("@name", entity.Name);
+            QueryDB query = new QueryDB(sql);
+            query.AddParametre("@name", entity.Name);
 
-
-                    connection.Open();
-
-                    using (SqlDataReader reader = command.ExecuteReader())
-                    {
-                        reader.Read();
-                        return new Genre(
-                            (long)reader["Id_Genre"],
-                            reader["Name"].ToString()
-                        );
-                    }
-                }
-            }
+            return conector.ExecuteReader(query, ConvertReaderToGenre).SingleOrDefault();
         }
 
         public Genre Update(long key, Genre entity)
         {
-            using (SqlConnection connection = new SqlConnection(_ConnectionString))
-            {
-                using (SqlCommand command = connection.CreateCommand())
-                {
-                    command.CommandType = System.Data.CommandType.Text;
-                    command.CommandText = "UPDATE Genre"
-                                        + " SET [Name] = @name"
-                                        + " OUTPUT inserted.Id_Genre, inserted.Name"
-                                        + " WHERE [Id_Genre] = @id";
+            string sql = "UPDATE Genre"
+                        + " SET [Name] = @name"
+                        + " OUTPUT inserted.Id_Genre, inserted.Name"
+                        + " WHERE [Id_Genre] = @id";
 
-                    command.Parameters.AddWithValue("@name", entity.Name);
-                    command.Parameters.AddWithValue("@id", key);
+            QueryDB query = new QueryDB(sql);
+            query.AddParametre("@id", entity.Id);
+            query.AddParametre("@name", entity.Name);
 
-                    connection.Open();
-                    using (SqlDataReader reader = command.ExecuteReader())
-                    {
-                        Genre genre = null;
-                        if (reader.Read())
-                        {
-                            genre = new Genre(
-                                (long)reader["Id_Genre"],
-                                reader["Name"].ToString()
-                            );
-                        }
-                        return genre;
-                    }
-                }
-            }
+            return conector.ExecuteReader(query, ConvertReaderToGenre).SingleOrDefault();
         }
 
         public bool Delete(long key)
