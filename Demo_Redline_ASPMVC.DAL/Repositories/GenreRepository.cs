@@ -18,49 +18,36 @@ namespace Demo_Redline_ASPMVC.DAL.Repositories
 
         public GenreRepository()
         {
-            conector = new ConnectDB(_ConnectionString);
-
             _ConnectionString = @"Server=DESKTOP-CE6MM13\SQLEXPRESS;Database=Demo_Redline_ASPMVC;Trusted_Connection=True;";
+            conector = new ConnectDB(_ConnectionString);
+        }
+
+        private Genre ConvertReaderToGenre(SqlDataReader dataReader)
+        {
+            return new Genre(
+                (long)dataReader["Id_Genre"],
+                dataReader["Name"].ToString()
+            );
         }
 
         // Méthode du CRUD
         public IEnumerable<Genre> GetAll()
         {
-            // Pour se connecter à SLQ server
-            using (SqlConnection connection = new SqlConnection(_ConnectionString))
-            {
-                // Creation de la commande SQL
-                using (SqlCommand command = connection.CreateCommand())
-                {
-                    command.CommandType = System.Data.CommandType.Text;
-                    command.CommandText = "SELECT Id_Genre, Name FROM genre;";
+            QueryDB query = new QueryDB("SELECT Id_Genre, Name FROM genre;");
 
-                    // Ouverture de la connexion
-                    connection.Open();
+            //Func<SqlDataReader, Genre> del = dataReader => new Genre(
+            //    (long)dataReader["Id_Genre"],
+            //    dataReader["Name"].ToString()
+            //);
 
-                    // Execution de la requete pour obtenir un "reader" => Col/Row
-                    using (SqlDataReader reader = command.ExecuteReader())
-                    {
-                        // Parcours des données de la requete
-                        List<Genre> genres = new List<Genre>();
-                        while (reader.Read())
-                        {
-                            // Recuperation des données de la Row
-                            long idGenre = (long)reader["Id_Genre"];
-                            string name = reader["Name"].ToString();
-
-                            genres.Add(new Genre(idGenre, name));
-                        }
-
-                        return genres;
-                    }
-                }
-            }
+            return conector.ExecuteReader<Genre>(query, ConvertReaderToGenre);
         }
+
+        // TODO: Simplifier les méthodes Get, Insert et Update !
 
         public Genre Get(long key)
         {
-            using(SqlConnection connection = new SqlConnection(_ConnectionString))
+            using (SqlConnection connection = new SqlConnection(_ConnectionString))
             {
                 using (SqlCommand command = connection.CreateCommand())
                 {
@@ -72,7 +59,7 @@ namespace Demo_Redline_ASPMVC.DAL.Repositories
 
                     connection.Open();
 
-                    using(SqlDataReader reader = command.ExecuteReader())
+                    using (SqlDataReader reader = command.ExecuteReader())
                     {
                         Genre genre = null;
                         if (reader.Read())
@@ -118,9 +105,9 @@ namespace Demo_Redline_ASPMVC.DAL.Repositories
 
         public Genre Update(long key, Genre entity)
         {
-            using(SqlConnection connection = new SqlConnection(_ConnectionString))
+            using (SqlConnection connection = new SqlConnection(_ConnectionString))
             {
-                using(SqlCommand command = connection.CreateCommand())
+                using (SqlCommand command = connection.CreateCommand())
                 {
                     command.CommandType = System.Data.CommandType.Text;
                     command.CommandText = "UPDATE Genre"
@@ -135,7 +122,7 @@ namespace Demo_Redline_ASPMVC.DAL.Repositories
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
                         Genre genre = null;
-                        if(reader.Read())
+                        if (reader.Read())
                         {
                             genre = new Genre(
                                 (long)reader["Id_Genre"],
