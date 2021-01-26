@@ -41,7 +41,7 @@ namespace Demo_Redline_ASPMVC.DAL.Repositories
             query.AddParametre("@title", entity.Title);
             query.AddParametre("@resume", entity.Resume);
             query.AddParametre("@duration", entity.Duration);
-            query.AddParametre("@relasedate", entity.RelaseDate);
+            query.AddParametre("@relasedate", entity.ReleaseDate);
             query.AddParametre("@idProductionCompagny", entity.IdProductionCompagny);
 
             return Connector.ExecuteReader(query, ConvertReaderToEntity).SingleOrDefault();
@@ -56,7 +56,7 @@ namespace Demo_Redline_ASPMVC.DAL.Repositories
             query.AddParametre("@title", entity.Title);
             query.AddParametre("@resume", entity.Resume);
             query.AddParametre("@duration", entity.Duration);
-            query.AddParametre("@relasedate", entity.RelaseDate);
+            query.AddParametre("@relasedate", entity.ReleaseDate);
             query.AddParametre("@idProductionCompagny", entity.IdProductionCompagny);
 
             return Connector.ExecuteReader(query, ConvertReaderToEntity).SingleOrDefault();
