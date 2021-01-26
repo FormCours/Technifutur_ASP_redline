@@ -54,8 +54,13 @@
     <Compile Include="Repositories\GenreRepository_SansToolbox.cs" />
     <Compile Include="Repositories\GenreRepository.cs" />
     <Compile Include="Repositories\IRepository.cs" />
+    <Compile Include="Repositories\MemberRepository.cs" />
+    <Compile Include="Repositories\MovieGenreRepository.cs" />
+    <Compile Include="Repositories\MovieRepository.cs" />
     <Compile Include="Repositories\ProductionCompagnyRepository.cs" />
+    <Compile Include="Repositories\RatingRepository.cs" />
     <Compile Include="Repositories\RepositoryBase.cs" />
+    <Compile Include="Repositories\RoleRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Toolbox\Toolbox.csproj">
