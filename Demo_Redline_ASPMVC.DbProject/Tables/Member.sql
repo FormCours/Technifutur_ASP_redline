@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[Member]
 (
-	[Id_Member] BIGINT NOT NULL, 
+	[Id_Member] BIGINT IDENTITY, 
     [Pseudo] NVARCHAR(50) NOT NULL, 
     [Email] NVARCHAR(250) NOT NULL, 
     [Password] NVARCHAR(50) NOT NULL, 

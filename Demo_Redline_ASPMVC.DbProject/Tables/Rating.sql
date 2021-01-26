@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[Rating]
 (
-	[Id_Rating] BIGINT NOT NULL, 
+	[Id_Rating] BIGINT IDENTITY, 
     [Score] DECIMAL(6, 3) NOT NULL, 
     [Comment] NVARCHAR(4000) NULL, 
     [RatingDate] DATETIME2 NOT NULL,
