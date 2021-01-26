@@ -12,27 +12,28 @@ namespace Demo_Redline_ASPMVC.ConsommationDAL
     {
         static void Main(string[] args)
         {
-            GenreRepository genreRepo = new GenreRepository();
-
-            Console.WriteLine("GenreRepository GetAll");
-            IEnumerable<Genre> genres = genreRepo.GetAll();
+            Console.WriteLine("Liste des genres disponibles :");
+            GenreRepository genreRepository = new GenreRepository();
+            IEnumerable<Genre> genres = genreRepository.GetAll();
             foreach (Genre g in genres)
             {
-                Console.WriteLine($"\t {g.Id} - {g.Name}");
+                Console.WriteLine($" - {g.Name} (id: {g.Id}");
             }
             Console.WriteLine();
 
-            Console.WriteLine("GenreRepository Get(3)");
-            Genre g3 = genreRepo.Get(3);
-            Console.WriteLine($"\t {g3.Id} - {g3.Name}");
+            Console.WriteLine("Ajouter une nouvelle compagnie de production");
+            ProductionCompanyRepository compagnyRepository = new ProductionCompanyRepository();
+
+            ProductionCompany company = new ProductionCompany("Disney");
+            ProductionCompany compDB   = compagnyRepository.Insert(company);
+            Console.WriteLine($" La compagnie \"{compDB.Name}\" a été ajouté avec l'id {compDB.Id}");
             Console.WriteLine();
 
-            Console.WriteLine("GenreRepository Insert");
-            Genre newGenre = new Genre("Demo");
 
-            Genre dbGenre = genreRepo.Insert(newGenre);
-            Console.WriteLine($"\t {dbGenre.Id} - {dbGenre.Name}");
 
+
+
+            
             Console.ReadLine();
         }
     }

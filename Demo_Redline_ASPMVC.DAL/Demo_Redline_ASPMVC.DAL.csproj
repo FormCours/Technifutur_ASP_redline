@@ -47,7 +47,7 @@
     <Compile Include="Entities\Member.cs" />
     <Compile Include="Entities\Movie.cs" />
     <Compile Include="Entities\MovieGenre.cs" />
-    <Compile Include="Entities\ProductionCompagny.cs" />
+    <Compile Include="Entities\ProductionCompany.cs" />
     <Compile Include="Entities\Rating.cs" />
     <Compile Include="Entities\Role.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -57,7 +57,7 @@
     <Compile Include="Repositories\MemberRepository.cs" />
     <Compile Include="Repositories\MovieGenreRepository.cs" />
     <Compile Include="Repositories\MovieRepository.cs" />
-    <Compile Include="Repositories\ProductionCompagnyRepository.cs" />
+    <Compile Include="Repositories\ProductionCompanyRepository.cs" />
     <Compile Include="Repositories\RatingRepository.cs" />
     <Compile Include="Repositories\RepositoryBase.cs" />
     <Compile Include="Repositories\RoleRepository.cs" />
