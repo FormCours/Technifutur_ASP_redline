@@ -34,6 +34,14 @@ namespace Demo_Redline_ASPMVC.DAL.Repositories
             return Connector.ExecuteReader(query, ConvertReaderToEntity);
         }
 
+        public Movie GetLastInsert()
+        {
+            QueryDB query = new QueryDB("SELECT TOP(1) * FROM Movie ORDER BY Id_Movie DESC");
+
+            return Connector.ExecuteReader(query, ConvertReaderToEntity).SingleOrDefault();
+        }
+
+
         public override Movie Insert(Movie entity)
         {
             QueryDB query = new QueryDB("INSERT INTO Movie ([Title],[Resume],[Duration],[ReleaseDate],[Id_ProductionCompany]) " +
