@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Demo_Redline_ASPMVC.WebApp.Models;
+using Demo_Redline_ASPMVC.WebApp.ServicesData;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,21 +12,11 @@ namespace Demo_Redline_ASPMVC.WebApp.Controllers
     {
         public ActionResult Index()
         {
-            return View();
-        }
+            GenreService genreService = new GenreService();
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
+            IEnumerable<Genre> genres = genreService.GetAll();
 
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            return View(genres);
         }
     }
 }
