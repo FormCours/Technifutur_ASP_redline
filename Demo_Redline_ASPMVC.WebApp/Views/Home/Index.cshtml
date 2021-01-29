@@ -1,18 +1,27 @@
-﻿@model IEnumerable<Demo_Redline_ASPMVC.WebApp.Models.Genre>
+﻿@model Demo_Redline_ASPMVC.WebApp.Models.HomeViewModel
 
 @{
     ViewBag.Title = "Movie site";
+    Demo_Redline_ASPMVC.WebApp.Models.Movie movie = Model.LastMovie;
 }
 
 
 <div class="row">
-    <div class="col-md-3">
-       <h3>Liste des genres</h3>
-       <ul>
-       @foreach (var genre in Model)
-       {
-          <li>@genre.Name</li>
-       }
-       </ul>
-    </div>
+   <div class="col-md-9">
+      <h3>Dernier film ajouté</h3>
+      <div>
+         <h4>@movie.Title</h4>
+         <p>@movie.ProductionCompany  @(movie.ReleaseDate?.ToString("d"))</p>
+         <p>@string.Join(", ", movie.Genres)</p>
+      </div>
+   </div>
+   <div class="col-md-3">
+      <h3>Liste des genres</h3>
+      <ul>
+         @foreach (var genre in Model.Genres)
+         {
+            <li>@genre.Name</li>
+         }
+      </ul>
+   </div>
 </div>

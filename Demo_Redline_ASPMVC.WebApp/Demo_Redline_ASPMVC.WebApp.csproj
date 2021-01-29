@@ -125,10 +125,13 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Mappers\GenreMapper.cs" />
+    <Compile Include="Mappers\MovieMapper.cs" />
     <Compile Include="Models\Genre.cs" />
+    <Compile Include="Models\HomeViewModel.cs" />
     <Compile Include="Models\Movie.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServicesData\GenreService.cs" />
+    <Compile Include="ServicesData\MovieService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />

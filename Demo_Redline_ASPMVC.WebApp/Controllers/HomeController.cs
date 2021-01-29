@@ -13,10 +13,15 @@ namespace Demo_Redline_ASPMVC.WebApp.Controllers
         public ActionResult Index()
         {
             GenreService genreService = new GenreService();
+            MovieService movieService = new MovieService();
 
-            IEnumerable<Genre> genres = genreService.GetAll();
+            HomeViewModel modelHome = new HomeViewModel()
+            {
+                Genres = genreService.GetAll(),
+                LastMovie = movieService.GetLast()
+            };
 
-            return View(genres);
+            return View(modelHome);
         }
     }
 }
