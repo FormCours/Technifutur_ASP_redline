@@ -12,10 +12,12 @@ namespace Demo_Redline_ASPMVC.WebApp.ServicesData
     public class GenreService
     {
         private GenreRepository genreRepository;
+        private MovieGenreRepository movieGenreRepository;
 
         public GenreService()
         {
             genreRepository = new GenreRepository();
+            movieGenreRepository = new MovieGenreRepository();
         }
 
         public IEnumerable<Genre> GetAll()
@@ -31,6 +33,14 @@ namespace Demo_Redline_ASPMVC.WebApp.ServicesData
         public Genre Get(long id)
         {
             return genreRepository.Get(id).ToClient();
+        }
+
+        public IEnumerable<Genre> GetFromMovie(long idMovie)
+        {
+            foreach (var movieGenre in movieGenreRepository.GetGenreOfMovie(idMovie))
+            {
+                yield return Get(movieGenre.IdGenre);
+            } 
         }
 
         public Genre Insert(Genre g)

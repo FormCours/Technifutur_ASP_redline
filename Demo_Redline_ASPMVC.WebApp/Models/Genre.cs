@@ -10,5 +10,11 @@ namespace Demo_Redline_ASPMVC.WebApp.Models
         public long Id { get; set; }
 
         public string Name { get; set; }
+
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }
