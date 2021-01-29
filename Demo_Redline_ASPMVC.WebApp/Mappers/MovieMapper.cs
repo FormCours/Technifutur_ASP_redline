@@ -24,6 +24,8 @@ namespace Demo_Redline_ASPMVC.WebApp.Mappers
             {
                 Id = global.Id,
                 Title = global.Title,
+                Resume = global.Resume,
+                Duration = global.Duration,
                 ReleaseDate = global.ReleaseDate,
                 ProductionCompany = company,
                 Genres= genres

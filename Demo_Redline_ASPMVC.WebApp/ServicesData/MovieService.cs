@@ -28,5 +28,10 @@ namespace Demo_Redline_ASPMVC.WebApp.ServicesData
         {
             return movieRepository.GetLastInsert().ToClient();
         }
+
+        public IEnumerable<Movie> GetAll()
+        {
+            return movieRepository.GetAll().Select(m => m.ToClient());
+        }
     }
 }

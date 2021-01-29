@@ -12,4 +12,6 @@ namespace Demo_Redline_ASPMVC.WebApp.Models
         public Movie LastMovie { get; set; }
 
     }
+
+    
 }

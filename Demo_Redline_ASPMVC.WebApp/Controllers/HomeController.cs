@@ -23,5 +23,12 @@ namespace Demo_Redline_ASPMVC.WebApp.Controllers
 
             return View(modelHome);
         }
+
+        public ActionResult Movies()
+        {
+            MovieService movieService = new MovieService();
+
+            return View(movieService.GetAll());
+        }
     }
 }

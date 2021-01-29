@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Demo_Redline_ASPMVC.WebApp.Models.Movie>
+
+@{
+    ViewBag.Title = "Movies";
+}
+
+<h2>Movies</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Resume)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Duration)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReleaseDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductionCompany)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+           @{
+              if (item.Resume != null && item.Resume.Length > 53)
+              {
+                 @*@(item.Resume.Substring(0, 50).Trim() + "...")*@
+
+                 @item.Resume.Substring(0, 50).Trim()@:...
+              }
+              else
+              {
+                 @Html.DisplayFor(modelItem => item.Resume)
+              }
+           }
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Duration)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReleaseDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductionCompany)
+        </td>
+    </tr>
+}
+
+</table>
