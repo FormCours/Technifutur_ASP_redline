@@ -13,6 +13,7 @@ namespace Demo_Redline_ASPMVC.WebApp.Models
         public long Id { get; set; }
 
         [Display(Name ="Titre")]
+        [Required]
         public string Title { get; set; }
 
         [Display(Name = "Résumé")]
@@ -28,6 +29,7 @@ namespace Demo_Redline_ASPMVC.WebApp.Models
         public DateTime? ReleaseDate { get; set; }
 
         [Display(Name ="Compagnie de production")]
+        [Required]
         public string ProductionCompany { get; set; }
 
         [Display(Name ="Genre")]

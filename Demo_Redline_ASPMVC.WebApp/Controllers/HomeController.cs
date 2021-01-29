@@ -15,7 +15,7 @@ namespace Demo_Redline_ASPMVC.WebApp.Controllers
             GenreService genreService = new GenreService();
             MovieService movieService = new MovieService();
 
-            HomeViewModel modelHome = new HomeViewModel()
+            HomeIndexViewModel modelHome = new HomeIndexViewModel()
             {
                 Genres = genreService.GetAll(),
                 LastMovie = movieService.GetLast()
@@ -29,6 +29,33 @@ namespace Demo_Redline_ASPMVC.WebApp.Controllers
             MovieService movieService = new MovieService();
 
             return View(movieService.GetAll());
+        }
+
+        public ActionResult AddMovie()
+        {
+            GenreService genreService = new GenreService();
+
+            HomeAddViewModel modelAdd = new HomeAddViewModel();
+            modelAdd.NewMovie = new Movie();
+            modelAdd.Genres = genreService.GetAll();
+
+            return View(modelAdd);
+        }
+
+        [HttpPost]
+        public ActionResult AddMovie(HomeAddViewModel movie)
+        {
+            if(!ModelState.IsValid)
+            {
+                GenreService genreService = new GenreService();
+                movie.Genres = genreService.GetAll();
+
+                return View(movie);
+            }
+
+            //TODO Save in DB !!!!
+
+            return RedirectToAction(nameof(Movies));
         }
     }
 }

@@ -1,0 +1,81 @@
+﻿@model Demo_Redline_ASPMVC.WebApp.Models.HomeAddViewModel
+
+@{
+   ViewBag.Title = "AddMovie";
+}
+
+<h2>AddMovie</h2>
+
+
+@using (Html.BeginForm())
+{
+   @Html.AntiForgeryToken()
+
+   <div class="form-horizontal">
+      <h4>Movie</h4>
+      <hr />
+      @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+      <div class="form-group">
+         @Html.LabelFor(model => model.NewMovie.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+         <div class="col-md-10">
+            @Html.EditorFor(model => model.NewMovie.Title, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.NewMovie.Title, "", new { @class = "text-danger" })
+         </div>
+      </div>
+
+      <div class="form-group">
+         @Html.LabelFor(model => model.NewMovie.Resume, htmlAttributes: new { @class = "control-label col-md-2" })
+         <div class="col-md-10">
+            @Html.EditorFor(model => model.NewMovie.Resume, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.NewMovie.Resume, "", new { @class = "text-danger" })
+         </div>
+      </div>
+
+      <div class="form-group">
+         @Html.LabelFor(model => model.NewMovie.Duration, htmlAttributes: new { @class = "control-label col-md-2" })
+         <div class="col-md-10">
+            @Html.EditorFor(model => model.NewMovie.Duration, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.NewMovie.Duration, "", new { @class = "text-danger" })
+         </div>
+      </div>
+
+      <div class="form-group">
+         @Html.LabelFor(model => model.NewMovie.ReleaseDate, htmlAttributes: new { @class = "control-label col-md-2" })
+         <div class="col-md-10">
+            @Html.EditorFor(model => model.NewMovie.ReleaseDate, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.NewMovie.ReleaseDate, "", new { @class = "text-danger" })
+         </div>
+      </div>
+
+      <div class="form-group">
+         @Html.LabelFor(model => model.NewMovie.ProductionCompany, htmlAttributes: new { @class = "control-label col-md-2" })
+         <div class="col-md-10">
+            @Html.EditorFor(model => model.NewMovie.ProductionCompany, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.NewMovie.ProductionCompany, "", new { @class = "text-danger" })
+         </div>
+      </div>
+
+      <div class="form-group">
+         @Html.LabelFor(model => model.NewMovie.Genres, htmlAttributes: new { @class = "control-label col-md-2" })
+         <div class="col-md-10">
+            @Html.ListBoxFor(model => model.SelectedGenre, Model.Genres.Select(g => new SelectListItem() { Value = g.Id.ToString(), Text = g.Name }))
+
+            @Html.ValidationMessageFor(model => model.NewMovie.Genres, "", new { @class = "text-danger" })
+         </div>
+      </div>
+
+      <div class="form-group">
+         <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
+         </div>
+      </div>
+   </div>
+}
+
+<div>
+   @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+   @Scripts.Render("~/bundles/jqueryval")
+}
