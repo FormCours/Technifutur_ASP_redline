@@ -13,7 +13,7 @@ namespace Demo_Redline_ASPMVC.DAL.Entities
         public string Resume { get; set; }
         public int? Duration { get; set; }
         public DateTime? ReleaseDate { get; set; }
-        public long IdProductionCompagny { get; set; }
+        public long IdProductionCompany { get; set; }
 
         public Movie(string title, string resume, int? duration, DateTime? releaseDate, long idProductionCompagny)
         {
@@ -22,7 +22,7 @@ namespace Demo_Redline_ASPMVC.DAL.Entities
             this.Resume = resume;
             this.Duration = duration;
             this.ReleaseDate = releaseDate;
-            this.IdProductionCompagny = idProductionCompagny;
+            this.IdProductionCompany = idProductionCompagny;
         }
 
         internal Movie(long id, string title, string resume, int? duration, DateTime? releaseDate, long idProductionCompagny)

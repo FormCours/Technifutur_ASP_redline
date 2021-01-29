@@ -34,6 +34,14 @@ namespace Demo_Redline_ASPMVC.DAL.Repositories
             return Connector.ExecuteReader(query, ConvertReaderToEntity);
         }
 
+        public IEnumerable<MovieGenre> GetGenreOfMovie(long idMovie)
+        {
+            QueryDB query = new QueryDB("SELECT * FROM Movie_Genre WHERE Id_Movie = @IdMovie");
+            query.AddParametre("@IdMovie", idMovie);
+
+            return Connector.ExecuteReader(query, ConvertReaderToEntity);
+        }
+
         public override MovieGenre Insert(MovieGenre entity)
         {
             QueryDB query = new QueryDB("INSERT INTO Movie_Genre ([Id_Movie],[Id_Genre]) OUTPUT inserted.* VALUES (@idMovie, @idGenre)");
