@@ -1,5 +1,6 @@
 ﻿using Demo_Redline_ASPMVC.WebApp.Models;
 using Demo_Redline_ASPMVC.WebApp.ServicesData;
+using Demo_Redline_ASPMVC.WebApp.Session;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,8 +37,11 @@ namespace Demo_Redline_ASPMVC.WebApp.Controllers
             }
 
             // Save in DB
-            memberService.InsertMember(member);
+            MemberProfil profil = memberService.InsertMember(member);
 
+            // Ajout en Session
+            SessionHelper.Member = profil;
+                
             // Redirection vers la page Home
             return RedirectToAction("Index", "Home");
         }
@@ -66,10 +70,16 @@ namespace Demo_Redline_ASPMVC.WebApp.Controllers
                 return View(member);
             }
 
-            // TODO Add Login Info in Session
-
+            // Sauvegarde du Login dans la Session
+            SessionHelper.Member = profil;
 
             // Redirection vers la page Home
+            return RedirectToAction("Index", "Home");
+        }
+
+        public ActionResult Logout()
+        {
+            SessionHelper.Disconnect();
             return RedirectToAction("Index", "Home");
         }
     }

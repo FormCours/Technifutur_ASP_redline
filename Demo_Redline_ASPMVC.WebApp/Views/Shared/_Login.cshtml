@@ -1,0 +1,31 @@
+﻿@using Demo_Redline_ASPMVC.WebApp.Session;
+
+<ul class="nav navbar-nav navbar-right">
+   @if (!SessionHelper.IsLogged)
+   {
+   <li>
+      @*@Html.ActionLink("S'enregistrer", "Register", "Member")*@
+      <a href="@Url.Action("Register", "Member")">
+         <span class="glyphicon glyphicon-user"></span>
+         S'enregistrer
+      </a>
+   </li>
+
+      <li>
+         <a href="@Url.Action("Login", "Member")">
+            <span class="glyphicon glyphicon-log-in"></span>
+            Se connecter
+         </a>
+      </li>
+   }
+   else
+   {
+      <li><span class="navbar-text">Bienvenue @SessionHelper.Member.Pseudo</span></li>
+      <li>
+         <a href="@Url.Action("Logout", "Member")">
+            <span class="glyphicon glyphicon-log-out"></span>
+            Se déconnecter
+         </a>
+      </li>
+   }
+</ul>

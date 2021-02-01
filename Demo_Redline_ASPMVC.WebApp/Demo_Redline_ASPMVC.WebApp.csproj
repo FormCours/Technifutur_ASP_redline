@@ -137,6 +137,7 @@
     <Compile Include="ServicesData\GenreService.cs" />
     <Compile Include="ServicesData\MemberService.cs" />
     <Compile Include="ServicesData\MovieService.cs" />
+    <Compile Include="Session\SessionHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -176,6 +177,7 @@
     <Content Include="Views\Home\AddMovie.cshtml" />
     <Content Include="Views\Member\Register.cshtml" />
     <Content Include="Views\Member\Login.cshtml" />
+    <Content Include="Views\Shared\_Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
