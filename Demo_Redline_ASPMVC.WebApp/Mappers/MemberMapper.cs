@@ -14,5 +14,14 @@ namespace Demo_Redline_ASPMVC.WebApp.Mappers
         {
             return new G.Member(member.Pseudo, member.Email, member.Password);
         }
+
+        public static C.MemberProfil ToProfil(this G.Member member)
+        {
+            return new C.MemberProfil()
+            {
+                Id = member.Id,
+                Pseudo = member.Pseudo
+            };
+        }
     }
 }

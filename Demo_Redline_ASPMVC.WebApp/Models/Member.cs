@@ -34,4 +34,26 @@ namespace Demo_Redline_ASPMVC.WebApp.Models
         [Display(Name = "Confirmation du mot de passe")]
         public string PasswordConfirme { get; set; }
     }
+
+    public class MemberLogin
+    {
+        [Required]
+        [Display(Name = "Votre email ou votre pseudo")]
+        public string Identifiant { get; set; }
+        
+        [Required]
+        [DataType(DataType.Password)]
+        [Display(Name = "Votre mot de passe")]
+        public string Password { get; set; }
+
+    }
+
+    public class MemberProfil
+    {
+        public long Id { get; set; }
+
+        public string Pseudo { get; set; }
+        
+        //TODO Add RoleMember
+    }
 }

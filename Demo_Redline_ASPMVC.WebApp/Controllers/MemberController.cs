@@ -41,5 +41,36 @@ namespace Demo_Redline_ASPMVC.WebApp.Controllers
             // Redirection vers la page Home
             return RedirectToAction("Index", "Home");
         }
+
+
+        public ActionResult Login()
+        {
+            return View(new MemberLogin());
+        }
+
+        [HttpPost]
+        public ActionResult Login(MemberLogin member)
+        {
+            MemberService memberService = new MemberService();
+
+            if(!ModelState.IsValid)
+            {
+                return View(member);
+            }
+
+            MemberProfil profil = memberService.GetMember(member);
+
+            if(profil == null)
+            {
+                ModelState.AddModelError("Account", "Bad credential");
+                return View(member);
+            }
+
+            // TODO Add Login Info in Session
+
+
+            // Redirection vers la page Home
+            return RedirectToAction("Index", "Home");
+        }
     }
 }

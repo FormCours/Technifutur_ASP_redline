@@ -27,5 +27,11 @@ namespace Demo_Redline_ASPMVC.WebApp.ServicesData
         {
             memberRepository.Insert(member.ToGlobal());
         }
+
+        public MemberProfil GetMember(MemberLogin member)
+        {
+            DAL.Entities.Member m = memberRepository.GetByCredential(member.Identifiant, member.Password);
+            return m.ToProfil();
+        }
     }
 }
