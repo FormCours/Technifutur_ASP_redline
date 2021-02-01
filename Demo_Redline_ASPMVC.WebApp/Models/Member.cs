@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Demo_Redline_ASPMVC.WebApp.CustomDataAnnotation;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -16,7 +17,7 @@ namespace Demo_Redline_ASPMVC.WebApp.Models
 
         [Required]
         [DataType(DataType.EmailAddress)]
-        //TODO Add custom attributes for trash mail
+        [NoTrashEmail(ErrorMessage = "Merci de ne pas utiliser d'adresse mail poubelle ♥")]
         [Display(Name = "Votre adresse electronique")]
         public string Email { get; set; }
 
