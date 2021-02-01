@@ -12,13 +12,10 @@ namespace Demo_Redline_ASPMVC.WebApp.Controllers
     {
         public ActionResult Index()
         {
-            GenreService genreService = new GenreService();
-            MovieService movieService = new MovieService();
-
             HomeIndexViewModel modelHome = new HomeIndexViewModel()
             {
-                Genres = genreService.GetAll(),
-                LastMovie = movieService.GetLast()
+                Genres = GenreService.Instance.GetAll(),
+                LastMovie = MovieService.Instance.GetLast()
             };
 
             return View(modelHome);
@@ -26,14 +23,14 @@ namespace Demo_Redline_ASPMVC.WebApp.Controllers
 
         public ActionResult Movies()
         {
-            MovieService movieService = new MovieService();
+            IEnumerable<Movie> movies = MovieService.Instance.GetAll();
 
-            return View(movieService.GetAll());
+            return View(movies);
         }
 
         public ActionResult AddMovie()
         {
-            GenreService genreService = new GenreService();
+            GenreService genreService = GenreService.Instance;
 
             HomeAddViewModel modelAdd = new HomeAddViewModel();
             modelAdd.NewMovie = new Movie();
@@ -43,14 +40,12 @@ namespace Demo_Redline_ASPMVC.WebApp.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddMovie(HomeAddViewModel movie)
+        public ActionResult AddMovie(HomeAddViewModel movieVM)
         {
+            movieVM.Genres = GenreService.Instance.GetAll();
             if(!ModelState.IsValid)
             {
-                GenreService genreService = new GenreService();
-                movie.Genres = genreService.GetAll();
-
-                return View(movie);
+                return View(movieVM);
             }
 
             //TODO Save in DB !!!!

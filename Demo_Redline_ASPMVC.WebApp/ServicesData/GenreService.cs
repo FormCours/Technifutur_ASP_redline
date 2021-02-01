@@ -11,10 +11,19 @@ namespace Demo_Redline_ASPMVC.WebApp.ServicesData
 {
     public class GenreService
     {
+        #region Singleton
+        private static readonly Lazy<GenreService> _Instance = new Lazy<GenreService>(() => new GenreService());
+
+        public static GenreService Instance
+        {
+            get { return _Instance.Value; }
+        }
+        #endregion
+
         private GenreRepository genreRepository;
         private MovieGenreRepository movieGenreRepository;
 
-        public GenreService()
+        private GenreService()
         {
             genreRepository = new GenreRepository();
             movieGenreRepository = new MovieGenreRepository();

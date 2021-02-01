@@ -10,9 +10,18 @@ namespace Demo_Redline_ASPMVC.WebApp.ServicesData
 {
     public class MemberService
     {
+        #region Singleton
+        private static readonly Lazy<MemberService> _Instance = new Lazy<MemberService>(() => new MemberService());
+
+        public static MemberService Instance
+        {
+            get { return _Instance.Value; }
+        }
+        #endregion
+
         private MemberRepository memberRepository;
 
-        public MemberService()
+        private MemberService()
         {
             memberRepository = new MemberRepository();
         }

@@ -19,8 +19,6 @@ namespace Demo_Redline_ASPMVC.WebApp.Controllers
         [HttpPost]
         public ActionResult Register(MemberRegister member)
         {
-            MemberService memberService = new MemberService();
-
             // Formulaire invalide
             if(!ModelState.IsValid)
             {
@@ -29,7 +27,7 @@ namespace Demo_Redline_ASPMVC.WebApp.Controllers
             }
 
             // Check si l'email ou le pseudo exsite
-            if(memberService.CheckAccountExists(member))
+            if(MemberService.Instance.CheckAccountExists(member))
             {
                 // Retour au formulaire !
                 ModelState.AddModelError("Account", "Le compte existe déjà");
@@ -37,7 +35,7 @@ namespace Demo_Redline_ASPMVC.WebApp.Controllers
             }
 
             // Save in DB
-            MemberProfil profil = memberService.InsertMember(member);
+            MemberProfil profil = MemberService.Instance.InsertMember(member);
 
             // Ajout en Session
             SessionHelper.Member = profil;
@@ -55,14 +53,12 @@ namespace Demo_Redline_ASPMVC.WebApp.Controllers
         [HttpPost]
         public ActionResult Login(MemberLogin member)
         {
-            MemberService memberService = new MemberService();
-
             if(!ModelState.IsValid)
             {
                 return View(member);
             }
 
-            MemberProfil profil = memberService.GetMember(member);
+            MemberProfil profil = MemberService.Instance.GetMember(member);
 
             if(profil == null)
             {

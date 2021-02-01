@@ -14,11 +14,9 @@ namespace Demo_Redline_ASPMVC.WebApp.Mappers
     {
         public static C.Movie ToClient(this G.Movie global)
         {
-            MovieService movieService = new MovieService();
-            String company = movieService.GetCompanyFromMovie(global.IdProductionCompany);
+            String company = MovieService.Instance.GetCompanyFromMovie(global.IdProductionCompany);
 
-            GenreService genreService = new GenreService();
-            List<C.Genre> genres = genreService.GetFromMovie(global.Id).ToList();
+            List<C.Genre> genres = GenreService.Instance.GetFromMovie(global.Id).ToList();
 
             return new C.Movie()
             {

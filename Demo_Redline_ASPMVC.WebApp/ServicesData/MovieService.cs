@@ -10,13 +10,24 @@ namespace Demo_Redline_ASPMVC.WebApp.ServicesData
 {
     public class MovieService
     {
+        #region Singleton
+        private static readonly Lazy<MovieService> _Instance = new Lazy<MovieService>(() => new MovieService());
+
+        public static MovieService Instance
+        {
+            get { return _Instance.Value; }
+        }
+        #endregion
+
         MovieRepository movieRepository;
         ProductionCompanyRepository companyRepository;
+        MovieGenreRepository movieGenreRepository;
 
-        public MovieService()
+        private MovieService()
         {
             movieRepository = new MovieRepository();
             companyRepository = new ProductionCompanyRepository();
+            movieGenreRepository = new MovieGenreRepository();
         }
 
         public string GetCompanyFromMovie(long IdProductionCompany)
