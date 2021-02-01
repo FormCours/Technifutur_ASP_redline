@@ -48,7 +48,16 @@ namespace Demo_Redline_ASPMVC.WebApp.Controllers
                 return View(movieVM);
             }
 
-            //TODO Save in DB !!!!
+            // Add genre in Movie
+            movieVM.NewMovie.Genres = new List<Genre>();
+            foreach (int id in movieVM.SelectedGenre)
+            {
+                Genre g = movieVM.Genres.Single(elem => elem.Id == id);
+                movieVM.NewMovie.Genres.Add(g);
+            }
+
+            // Save in DB !!!!
+            MovieService.Instance.Insert(movieVM.NewMovie);
 
             return RedirectToAction(nameof(Movies));
         }

@@ -44,5 +44,34 @@ namespace Demo_Redline_ASPMVC.WebApp.ServicesData
         {
             return movieRepository.GetAll().Select(m => m.ToClient());
         }
+
+        public void Insert(Movie movie)
+        {
+            // Recup ou ajout de la compagnie de production
+            DAL.Entities.ProductionCompany companyDB = companyRepository.GetAll().SingleOrDefault(cp => cp.Name == movie.ProductionCompany);
+
+            if (companyDB == null)
+            {
+                DAL.Entities.ProductionCompany newCompany = new DAL.Entities.ProductionCompany(movie.ProductionCompany);
+                companyDB = companyRepository.Insert(newCompany);
+            }
+
+            // Ajout du film
+            DAL.Entities.Movie newMovie = new DAL.Entities.Movie(
+                movie.Title,
+                movie.Resume,
+                movie.Duration,
+                movie.ReleaseDate,
+                companyDB.Id
+            );
+            DAL.Entities.Movie movieDB = movieRepository.Insert(newMovie);
+
+            // Ajout des genres du film
+            foreach (Genre genre in movie.Genres)
+            {
+                // Dans notre cas, les genres sont deja connus en DB. Sinon, il aurait été necessaire de les ajouter en DB avant!
+                movieGenreRepository.Insert(new DAL.Entities.MovieGenre(movieDB.Id, genre.Id));
+            }
+        }
     }
 }
