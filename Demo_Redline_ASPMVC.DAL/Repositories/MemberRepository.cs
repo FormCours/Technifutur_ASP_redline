@@ -49,6 +49,15 @@ namespace Demo_Redline_ASPMVC.DAL.Repositories
             return Connector.ExecuteReader(query, ConvertReaderToEntity);
         }
 
+        public bool CheckAccountExists(string email, string pseudo)
+        {
+            QueryDB query = new QueryDB("SELECT * FROM Member WHERE Email LIKE @email OR Pseudo LIKE @pseudo");
+            query.AddParametre("@email", email);
+            query.AddParametre("@pseudo", pseudo);
+
+            return Connector.ExecuteReader(query, ConvertReaderToEntity).Count() == 1;
+        }
+
         public override Member Insert(Member entity)
         {
             //QueryDB queryRole = new QueryDB("SELECT id FROM [Role] WHERE Name = 'Member'");
@@ -60,11 +69,11 @@ namespace Demo_Redline_ASPMVC.DAL.Repositories
 
             // TODO : Utiliser une procedure stockée qui hash le mot de passe dans la base de donnée
             QueryDB query = new QueryDB("INSERT INTO Member ([Pseudo],[Email],[Password],[Id_Role]) " +
-                                        "OUTPUT inserted.* VALUES (@pseudo, @email, @pwd, @idRole");
+                                        "OUTPUT inserted.* VALUES (@pseudo, @email, @pwd, @idRole)");
             query.AddParametre("@pseudo", entity.Pseudo);
             query.AddParametre("@email", entity.Email);
             query.AddParametre("@pwd", entity.Password);
-            query.AddParametre("@idRole", entity.IdRole);
+            query.AddParametre("@idRole", idRoleMember);
 
             return Connector.ExecuteReader(query, ConvertReaderToEntity).SingleOrDefault();
         }
