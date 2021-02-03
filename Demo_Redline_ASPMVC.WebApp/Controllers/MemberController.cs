@@ -52,6 +52,7 @@ namespace Demo_Redline_ASPMVC.WebApp.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Login(MemberLogin member)
         {
             if(!ModelState.IsValid)

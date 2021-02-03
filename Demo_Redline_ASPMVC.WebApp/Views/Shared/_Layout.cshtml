@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using Demo_Redline_ASPMVC.WebApp.Session
+@using Demo_Redline_ASPMVC.WebApp.Models
+
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -23,7 +26,10 @@
                <ul class="nav navbar-nav">
                   <li>@Html.ActionLink("Accueil", "Index", "Home")</li>
                   <li>@Html.ActionLink("Les films", "Movies", "Home")</li>
-                  <li>@Html.ActionLink("Ajouter film", "AddMovie", "Home")</li>
+                  @if(SessionHelper.Member != null && SessionHelper.Member.Role != MemberProfil.RoleEnum.Member)
+                  {
+                     <li>@Html.ActionLink("Ajouter film", "AddMovie", "Home")</li>
+                  }
                </ul>
 
                @Html.Partial("_Login")

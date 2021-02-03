@@ -1,4 +1,5 @@
-﻿using Demo_Redline_ASPMVC.WebApp.Models;
+﻿using Demo_Redline_ASPMVC.WebApp.CustomAuthorize;
+using Demo_Redline_ASPMVC.WebApp.Models;
 using Demo_Redline_ASPMVC.WebApp.ServicesData;
 using Demo_Redline_ASPMVC.WebApp.Session;
 using System;
@@ -29,6 +30,7 @@ namespace Demo_Redline_ASPMVC.WebApp.Controllers
             return View(movies);
         }
 
+        [AuthorizeManager(MemberProfil.RoleEnum.Seeder, MemberProfil.RoleEnum.Modo)]
         public ActionResult AddMovie()
         {
             GenreService genreService = GenreService.Instance;
@@ -42,6 +44,7 @@ namespace Demo_Redline_ASPMVC.WebApp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeManager(MemberProfil.RoleEnum.Seeder, MemberProfil.RoleEnum.Modo)]
         public ActionResult AddMovie(HomeAddViewModel movieVM)
         {
             movieVM.Genres = GenreService.Instance.GetAll();
@@ -92,6 +95,7 @@ namespace Demo_Redline_ASPMVC.WebApp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeManager]
         public ActionResult AddRatingMovie(long? id, HomeMovieViewModel movieVM)
         {
             if (id == null)
@@ -117,5 +121,6 @@ namespace Demo_Redline_ASPMVC.WebApp.Controllers
 
             return RedirectToAction(nameof(Movie), new { id = id });
         }
+
     }
 }
