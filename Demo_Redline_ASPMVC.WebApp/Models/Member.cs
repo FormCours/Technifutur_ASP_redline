@@ -50,10 +50,18 @@ namespace Demo_Redline_ASPMVC.WebApp.Models
 
     public class MemberProfil
     {
+        public enum RoleEnum
+        {
+            Admin = 1,
+            Modo = 2,
+            Seeder = 3,
+            Member = 4
+        }
+
         public long Id { get; set; }
 
         public string Pseudo { get; set; }
-        
-        //TODO Add RoleMember
+
+        public RoleEnum Role { get; set; }
     }
 }

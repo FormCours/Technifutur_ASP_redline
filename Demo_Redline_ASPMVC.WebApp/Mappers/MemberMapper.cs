@@ -24,7 +24,8 @@ namespace Demo_Redline_ASPMVC.WebApp.Mappers
             return new C.MemberProfil()
             {
                 Id = member.Id,
-                Pseudo = member.Pseudo
+                Pseudo = member.Pseudo,
+                Role = (C.MemberProfil.RoleEnum)member.IdRole
             };
         }
     }

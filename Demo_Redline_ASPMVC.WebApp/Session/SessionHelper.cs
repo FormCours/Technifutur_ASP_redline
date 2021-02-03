@@ -31,6 +31,14 @@ namespace Demo_Redline_ASPMVC.WebApp.Session
             }
         }
 
+        public static bool IsAdmin
+        {
+            get
+            {
+                return IsLogged && Member.Role == MemberProfil.RoleEnum.Admin;
+            }
+        }
+
         public static void Disconnect()
         {
             HttpContext.Current.Session.Abandon();
