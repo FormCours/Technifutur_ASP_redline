@@ -12,11 +12,15 @@ namespace Demo_Redline_ASPMVC.WebApp.Mappers
     {
         public static G.Member ToGlobal(this C.MemberRegister member)
         {
+            if (member == null) return null;
+
             return new G.Member(member.Pseudo, member.Email, member.Password);
         }
 
         public static C.MemberProfil ToProfil(this G.Member member)
         {
+            if (member == null) return null;
+
             return new C.MemberProfil()
             {
                 Id = member.Id,

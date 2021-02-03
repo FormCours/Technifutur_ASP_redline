@@ -12,6 +12,8 @@ namespace Demo_Redline_ASPMVC.WebApp.Mappers
     {
         public static C.Genre ToClient(this G.Genre global)
         {
+            if (global == null) return null;
+
             return new C.Genre()
             {
                 Id = global.Id,
@@ -21,6 +23,8 @@ namespace Demo_Redline_ASPMVC.WebApp.Mappers
 
         public static G.Genre ToGlobal(this C.Genre client)
         {
+            if (client == null) return null;
+
             return new G.Genre(client.Name)
             {
                 Id = client.Id
