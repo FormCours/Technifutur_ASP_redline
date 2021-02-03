@@ -26,12 +26,7 @@ namespace Demo_Redline_ASPMVC.WebApp.Models
     {
         public Movie Movie { get; set; }
         public Rating NewRating { get; set; }
+        public IEnumerable<Rating> Ratings { get; set; }
     }
 
-
-    public class HomeAddRatingViewModel
-    {
-        public double Rating { get; set; }
-        public string Comment { get; set; }
-    }
 }

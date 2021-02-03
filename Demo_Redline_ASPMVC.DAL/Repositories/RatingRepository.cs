@@ -27,6 +27,14 @@ namespace Demo_Redline_ASPMVC.DAL.Repositories
             return Connector.ExecuteReader(query, ConvertReaderToEntity).SingleOrDefault();
         }
 
+        public IEnumerable<Rating> GetByMovie(long idMovie)
+        {
+            QueryDB query = new QueryDB("SELECT * FROM Rating WHERE Id_Movie = @IdMovie");
+            query.AddParametre("@IdMovie", idMovie);
+
+            return Connector.ExecuteReader(query, ConvertReaderToEntity);
+        }
+
         public override IEnumerable<Rating> GetAll()
         {
             QueryDB query = new QueryDB("SELECT * FROM Rating");

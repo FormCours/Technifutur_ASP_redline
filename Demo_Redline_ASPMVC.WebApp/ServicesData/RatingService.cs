@@ -30,5 +30,10 @@ namespace Demo_Redline_ASPMVC.WebApp.ServicesData
         {
             return ratingRepository.Insert(rating.ToGlobal()).Id;
         }
+
+        internal IEnumerable<Rating> GetByMovie(long id)
+        {
+            return ratingRepository.GetByMovie(id).Select(r => r.ToClient());
+        }
     }
 }

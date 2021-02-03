@@ -23,5 +23,20 @@ namespace Demo_Redline_ASPMVC.WebApp.Mappers
             );
         }
 
+        public static C.Rating ToClient(this G.Rating global)
+        {
+            if (global == null) return null;
+
+            return new C.Rating()
+            {
+                Id = global.Id,
+                Score = global.Score,
+                Comment = global.Comment,
+                RatingDate = global.RatingDate,
+                IdMovie = global.IdMovie,
+                IdMember = global.IdMember
+            };
+        }
+
     }
 }

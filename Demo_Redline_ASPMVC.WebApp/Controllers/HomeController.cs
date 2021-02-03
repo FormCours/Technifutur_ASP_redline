@@ -77,10 +77,13 @@ namespace Demo_Redline_ASPMVC.WebApp.Controllers
                 return HttpNotFound();
             }
 
+            IEnumerable<Rating> ratings = RatingService.Instance.GetByMovie((long)id);
+
             HomeMovieViewModel movieVM = new HomeMovieViewModel()
             {
                 Movie = movie,
-                NewRating = new Rating()
+                NewRating = new Rating(),
+                Ratings = ratings
             };
 
             return View(movieVM);
@@ -97,6 +100,7 @@ namespace Demo_Redline_ASPMVC.WebApp.Controllers
             if(!ModelState.IsValid)
             {
                 movieVM.Movie = MovieService.Instance.Get((long)id);
+                movieVM.Ratings = RatingService.Instance.GetByMovie((long)id);
 
                 return View(nameof(Movie), movieVM);
             }

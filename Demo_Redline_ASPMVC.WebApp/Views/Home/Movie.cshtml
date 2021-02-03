@@ -94,6 +94,17 @@
       <p>Vous devez être connecté pour ajouter une notation !</p>
    }
 
+   <h3>Historique des notations</h3>
+   <ul class="list-group">
+      @foreach (var rating in Model.Ratings)
+      {
+         <li class="list-group-item">
+            <p class="list-group-item-heading">[@rating.Score] Pseudo - @rating.RatingDate</p>
+            <p class="list-group-item-text">@rating.Comment</p>
+         </li>
+      }
+   </ul>
+
 </div>
 <p>
    @Html.ActionLink("Back to List", "Movies")
