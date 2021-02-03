@@ -21,8 +21,8 @@ namespace Demo_Redline_ASPMVC.DAL.Entities
             this.Score = score;
             this.Comment = comment;
             this.RatingDate = ratingDate;
-            this.IdMovie = IdMovie;
-            this.IdMember = IdMember;
+            this.IdMovie = idMovie;
+            this.IdMember = idMember;
         }
 
         internal Rating(long id, double score, string comment, DateTime ratingDate, long idMovie, long idMember)
