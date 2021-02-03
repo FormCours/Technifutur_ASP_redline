@@ -41,6 +41,7 @@ namespace Demo_Redline_ASPMVC.WebApp.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult AddMovie(HomeAddViewModel movieVM)
         {
             movieVM.Genres = GenreService.Instance.GetAll();
@@ -90,6 +91,7 @@ namespace Demo_Redline_ASPMVC.WebApp.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult AddRatingMovie(long? id, HomeMovieViewModel movieVM)
         {
             if (id == null)
