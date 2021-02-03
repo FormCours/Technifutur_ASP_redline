@@ -24,9 +24,13 @@
             </div>
             <div class="navbar-collapse collapse">
                <ul class="nav navbar-nav">
+                  @if (SessionHelper.IsAdmin)
+                  {
+                     <li>@Html.ActionLink("Panel Admin", "Index", "Home", new { area = "admin" }, null)</li>
+                  }
                   <li>@Html.ActionLink("Accueil", "Index", "Home")</li>
                   <li>@Html.ActionLink("Les films", "Movies", "Home")</li>
-                  @if(SessionHelper.Member != null && SessionHelper.Member.Role != MemberProfil.RoleEnum.Member)
+                  @if (SessionHelper.Member != null && SessionHelper.Member.Role != MemberProfil.RoleEnum.Member)
                   {
                      <li>@Html.ActionLink("Ajouter film", "AddMovie", "Home")</li>
                   }

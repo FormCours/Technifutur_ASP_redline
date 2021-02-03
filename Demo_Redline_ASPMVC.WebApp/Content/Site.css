@@ -22,3 +22,7 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.area-zone {
+   background-color: darkred;
+}
