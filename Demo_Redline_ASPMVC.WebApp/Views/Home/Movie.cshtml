@@ -1,0 +1,63 @@
+﻿@model Demo_Redline_ASPMVC.WebApp.Models.Movie
+
+<div>
+    <h4>Movie</h4>
+    <hr />
+
+    <h5>Info</h5>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+           @Html.DisplayNameFor(model => model.Genres)
+        </dt>
+        <dd>
+           <ul class="list-unstyled">
+           @foreach (var genre in Model.Genres)
+           {
+              <li>@genre.Name</li>
+           }
+           </ul>
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Resume)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Resume)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Duration)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Duration)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReleaseDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ReleaseDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductionCompany)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ProductionCompany)
+        </dd>
+
+    </dl>
+
+    <h5>Ajouter une notation</h5>
+    
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Movies")
+</p>

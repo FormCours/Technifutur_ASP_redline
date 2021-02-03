@@ -61,5 +61,22 @@ namespace Demo_Redline_ASPMVC.WebApp.Controllers
 
             return RedirectToAction(nameof(Movies));
         }
+
+        public ActionResult Movie(long? id)
+        {
+            if(id == null)
+            {
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest, "Missing movie id !");
+            }
+
+            Movie movie = MovieService.Instance.Get((long)id);
+
+            if(movie == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(movie);
+        }
     }
 }

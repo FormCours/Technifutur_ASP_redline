@@ -35,6 +35,11 @@ namespace Demo_Redline_ASPMVC.WebApp.ServicesData
             return companyRepository.Get(IdProductionCompany).Name;
         }
 
+        public Movie Get(long id)
+        {
+            return movieRepository.Get(id).ToClient();
+        }
+
         public Movie GetLast()
         {
             return movieRepository.GetLastInsert().ToClient();
