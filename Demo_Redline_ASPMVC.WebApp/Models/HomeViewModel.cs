@@ -20,4 +20,18 @@ namespace Demo_Redline_ASPMVC.WebApp.Models
         public Movie NewMovie { get; set; }
         public List<int> SelectedGenre { get; set; }
     }
+
+
+    public class HomeMovieViewModel
+    {
+        public Movie Movie { get; set; }
+        public Rating NewRating { get; set; }
+    }
+
+
+    public class HomeAddRatingViewModel
+    {
+        public double Rating { get; set; }
+        public string Comment { get; set; }
+    }
 }

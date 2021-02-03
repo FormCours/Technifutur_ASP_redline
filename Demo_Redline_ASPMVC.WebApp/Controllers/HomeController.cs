@@ -76,7 +76,33 @@ namespace Demo_Redline_ASPMVC.WebApp.Controllers
                 return HttpNotFound();
             }
 
-            return View(movie);
+            HomeMovieViewModel movieVM = new HomeMovieViewModel()
+            {
+                Movie = movie,
+                NewRating = new Rating()
+            };
+
+            return View(movieVM);
+        }
+
+        [HttpPost]
+        public ActionResult AddRatingMovie(long? id, HomeMovieViewModel movieVM)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest, "Fail for the rating !");
+            }
+
+            if(!ModelState.IsValid)
+            {
+                movieVM.Movie = MovieService.Instance.Get((long)id);
+
+                return View(nameof(Movie), movieVM);
+            }
+
+            // TODO Save rating in DB
+
+            return RedirectToAction(nameof(Movie), new { id = id });
         }
     }
 }

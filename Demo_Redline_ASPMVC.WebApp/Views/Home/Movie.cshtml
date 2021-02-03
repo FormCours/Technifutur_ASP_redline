@@ -1,63 +1,100 @@
-﻿@model Demo_Redline_ASPMVC.WebApp.Models.Movie
+﻿@using Demo_Redline_ASPMVC.WebApp.Session
+
+@model Demo_Redline_ASPMVC.WebApp.Models.HomeMovieViewModel
 
 <div>
-    <h4>Movie</h4>
-    <hr />
+   <h4>Movie</h4>
+   <hr />
 
-    <h5>Info</h5>
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
+   <h3>Info</h3>
+   <dl class="dl-horizontal">
+      <dt>
+         @Html.DisplayNameFor(model => model.Movie.Title)
+      </dt>
+      <dd>
+         @Html.DisplayFor(model => model.Movie.Title)
+      </dd>
 
-        <dt>
-           @Html.DisplayNameFor(model => model.Genres)
-        </dt>
-        <dd>
-           <ul class="list-unstyled">
-           @foreach (var genre in Model.Genres)
-           {
-              <li>@genre.Name</li>
-           }
-           </ul>
-        </dd>
+      <dt>
+         @Html.DisplayNameFor(model => model.Movie.Genres)
+      </dt>
+      <dd>
+         <ul class="list-unstyled">
+            @foreach (var genre in Model.Movie.Genres)
+            {
+               <li>@genre.Name</li>
+            }
+         </ul>
+      </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Resume)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Resume)
-        </dd>
+      <dt>
+         @Html.DisplayNameFor(model => model.Movie.Resume)
+      </dt>
+      <dd>
+         @Html.DisplayFor(model => model.Movie.Resume)
+      </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Duration)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Duration)
-        </dd>
+      <dt>
+         @Html.DisplayNameFor(model => model.Movie.Duration)
+      </dt>
+      <dd>
+         @Html.DisplayFor(model => model.Movie.Duration)
+      </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ReleaseDate)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.ReleaseDate)
-        </dd>
+      <dt>
+         @Html.DisplayNameFor(model => model.Movie.ReleaseDate)
+      </dt>
+      <dd>
+         @Html.DisplayFor(model => model.Movie.ReleaseDate)
+      </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ProductionCompany)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.ProductionCompany)
-        </dd>
+      <dt>
+         @Html.DisplayNameFor(model => model.Movie.ProductionCompany)
+      </dt>
+      <dd>
+         @Html.DisplayFor(model => model.Movie.ProductionCompany)
+      </dd>
 
-    </dl>
+   </dl>
 
-    <h5>Ajouter une notation</h5>
-    
+   <h3>Ajouter une notation</h3>
+   @if (SessionHelper.IsLogged)
+   {
+      using (Html.BeginForm("AddRatingMovie", "Home", new { Id = Model.Movie.Id }))
+      {
+         @Html.AntiForgeryToken()
+
+         <div class="form-horizontal">
+            <div class="form-group">
+               @Html.LabelFor(model => model.NewRating.Score, htmlAttributes: new { @class = "control-label col-md-2" })
+               <div class="col-md-10">
+                  @Html.EditorFor(model => model.NewRating.Score, new { htmlAttributes = new { @class = "form-control" } })
+                  @Html.ValidationMessageFor(model => model.NewRating.Score, "", new { @class = "text-danger" })
+               </div>
+            </div>
+
+            <div class="form-group">
+               @Html.LabelFor(model => model.NewRating.Comment, htmlAttributes: new { @class = "control-label col-md-2" })
+               <div class="col-md-10">
+                  @Html.EditorFor(model => model.NewRating.Comment, new { htmlAttributes = new { @class = "form-control" } })
+                  @Html.ValidationMessageFor(model => model.NewRating.Comment, "", new { @class = "text-danger" })
+               </div>
+            </div>
+
+            <div class="form-group">
+               <div class="col-md-offset-2 col-md-10">
+                  <input type="submit" value="Create" class="btn btn-default" />
+               </div>
+            </div>
+         </div>
+      }
+   }
+   else
+   {
+      <p>Vous devez être connecté pour ajouter une notation !</p>
+   }
+
 </div>
 <p>
-    @Html.ActionLink("Back to List", "Movies")
+   @Html.ActionLink("Back to List", "Movies")
 </p>

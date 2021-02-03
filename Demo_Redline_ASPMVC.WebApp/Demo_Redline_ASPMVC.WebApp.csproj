@@ -133,6 +133,7 @@
     <Compile Include="Models\HomeViewModel.cs" />
     <Compile Include="Models\Member.cs" />
     <Compile Include="Models\Movie.cs" />
+    <Compile Include="Models\Rating.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServicesData\GenreService.cs" />
     <Compile Include="ServicesData\MemberService.cs" />
