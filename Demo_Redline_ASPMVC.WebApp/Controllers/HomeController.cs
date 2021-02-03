@@ -1,5 +1,6 @@
 ﻿using Demo_Redline_ASPMVC.WebApp.Models;
 using Demo_Redline_ASPMVC.WebApp.ServicesData;
+using Demo_Redline_ASPMVC.WebApp.Session;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -100,7 +101,13 @@ namespace Demo_Redline_ASPMVC.WebApp.Controllers
                 return View(nameof(Movie), movieVM);
             }
 
-            // TODO Save rating in DB
+            // Update data before save
+            movieVM.NewRating.RatingDate = DateTime.Now;
+            movieVM.NewRating.IdMovie = (long)id;
+            movieVM.NewRating.IdMember = SessionHelper.Member.Id;
+
+            // Save rating in DB
+            RatingService.Instance.Insert(movieVM.NewRating);
 
             return RedirectToAction(nameof(Movie), new { id = id });
         }

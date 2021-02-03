@@ -129,6 +129,7 @@
     <Compile Include="Mappers\GenreMapper.cs" />
     <Compile Include="Mappers\MemberMapper.cs" />
     <Compile Include="Mappers\MovieMapper.cs" />
+    <Compile Include="Mappers\RatingMapper.cs" />
     <Compile Include="Models\Genre.cs" />
     <Compile Include="Models\HomeViewModel.cs" />
     <Compile Include="Models\Member.cs" />
@@ -138,6 +139,7 @@
     <Compile Include="ServicesData\GenreService.cs" />
     <Compile Include="ServicesData\MemberService.cs" />
     <Compile Include="ServicesData\MovieService.cs" />
+    <Compile Include="ServicesData\RatingService.cs" />
     <Compile Include="Session\SessionHelper.cs" />
   </ItemGroup>
   <ItemGroup>

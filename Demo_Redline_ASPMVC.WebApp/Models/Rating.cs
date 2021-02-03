@@ -20,5 +20,12 @@ namespace Demo_Redline_ASPMVC.WebApp.Models
 
         [Display(Name = "Date d'envoi")]
         public DateTime RatingDate { get; set; }
+
+
+        [ScaffoldColumn(false)]
+        public long IdMovie { get; set; }
+
+        [ScaffoldColumn(false)]
+        public long IdMember { get; set; }
     }
 }
