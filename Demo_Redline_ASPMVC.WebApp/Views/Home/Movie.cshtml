@@ -28,6 +28,13 @@
       </dd>
 
       <dt>
+         @Html.DisplayName("Notation moyenne")
+      </dt>
+      <dd>
+         @Model.Ratings.Average(r => r.Score).ToString("f2")
+      </dd>
+
+      <dt>
          @Html.DisplayNameFor(model => model.Movie.Resume)
       </dt>
       <dd>
