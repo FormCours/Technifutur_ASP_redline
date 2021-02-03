@@ -13,19 +13,22 @@ namespace Demo_Redline_ASPMVC.WebApp.Models
 
         [Required]
         [Display(Name = "Score")]
+        [DisplayFormat(DataFormatString = "{0:f2}")]
         public double Score { get; set; }
 
         [Display(Name = "Commentaire")]
+        [DisplayFormat(NullDisplayText = "---")]
         public string Comment { get; set; }
 
         [Display(Name = "Date d'envoi")]
+        [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
         public DateTime RatingDate { get; set; }
 
 
         [ScaffoldColumn(false)]
-        public long IdMovie { get; set; }
+        public Movie Movie { get; set; }
 
         [ScaffoldColumn(false)]
-        public long IdMember { get; set; }
+        public MemberProfil Member { get; set; }
     }
 }

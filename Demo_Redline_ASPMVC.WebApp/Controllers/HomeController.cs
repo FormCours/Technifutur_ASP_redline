@@ -107,8 +107,8 @@ namespace Demo_Redline_ASPMVC.WebApp.Controllers
 
             // Update data before save
             movieVM.NewRating.RatingDate = DateTime.Now;
-            movieVM.NewRating.IdMovie = (long)id;
-            movieVM.NewRating.IdMember = SessionHelper.Member.Id;
+            movieVM.NewRating.Movie = MovieService.Instance.Get((long)id);
+            movieVM.NewRating.Member = SessionHelper.Member;
 
             // Save rating in DB
             RatingService.Instance.Insert(movieVM.NewRating);

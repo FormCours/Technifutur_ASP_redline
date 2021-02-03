@@ -32,6 +32,11 @@ namespace Demo_Redline_ASPMVC.WebApp.ServicesData
             return memberRepository.CheckAccountExists(member.Email, member.Pseudo);
         }
 
+        public MemberProfil Get(long idMember)
+        {
+            return memberRepository.Get(idMember).ToProfil();
+        }
+
         public MemberProfil InsertMember(MemberRegister member)
         {
             return memberRepository.Insert(member.ToGlobal()).ToProfil();

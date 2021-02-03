@@ -99,8 +99,8 @@
       @foreach (var rating in Model.Ratings)
       {
          <li class="list-group-item">
-            <p class="list-group-item-heading">[@rating.Score] Pseudo - @rating.RatingDate</p>
-            <p class="list-group-item-text">@rating.Comment</p>
+            <p class="list-group-item-heading">[@Html.DisplayFor(m => rating.Score)] @rating.Member.Pseudo - @Html.DisplayFor(m => rating.RatingDate)</p>
+            <p class="list-group-item-text">@Html.DisplayFor(m => rating.Comment)</p>
          </li>
       }
    </ul>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Demo_Redline_ASPMVC.WebApp.ServicesData;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -18,8 +19,8 @@ namespace Demo_Redline_ASPMVC.WebApp.Mappers
                 client.Score,
                 client.Comment,
                 client.RatingDate,
-                client.IdMovie,
-                client.IdMember
+                client.Movie.Id,
+                client.Member.Id
             );
         }
 
@@ -27,14 +28,17 @@ namespace Demo_Redline_ASPMVC.WebApp.Mappers
         {
             if (global == null) return null;
 
+            C.Movie movie = MovieService.Instance.Get(global.IdMovie);
+            C.MemberProfil member = MemberService.Instance.Get(global.IdMember);
+
             return new C.Rating()
             {
                 Id = global.Id,
                 Score = global.Score,
                 Comment = global.Comment,
                 RatingDate = global.RatingDate,
-                IdMovie = global.IdMovie,
-                IdMember = global.IdMember
+                Movie = movie,
+                Member = member
             };
         }
 
