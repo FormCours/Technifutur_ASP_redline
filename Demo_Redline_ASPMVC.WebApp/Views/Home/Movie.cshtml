@@ -30,9 +30,14 @@
       <dt>
          @Html.DisplayName("Notation moyenne")
       </dt>
-      <dd>
-         @Model.Ratings.Average(r => r.Score).ToString("f2")
-      </dd>
+      @if (Model.Ratings.Count() > 0)
+      {
+         <dd>@Model.Ratings.Average(r => r.Score).ToString("f2")</dd>
+      }
+      else
+      {
+         <dd>Pas de notation.</dd>
+      }
 
       <dt>
          @Html.DisplayNameFor(model => model.Movie.Resume)
