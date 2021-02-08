@@ -34,7 +34,7 @@ namespace Demo_Redline_ASPMVC.WebApp.CustomAuthorize
                     }
                 );
             }
-            else if (!roles.Contains(SessionHelper.Member.Role))
+            else if (roles.Count > 0 && !roles.Contains(SessionHelper.Member.Role))
             {
                 filterContext.Result = new HttpStatusCodeResult(HttpStatusCode.Forbidden);
             }
