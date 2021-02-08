@@ -86,7 +86,7 @@ namespace Demo_Redline_ASPMVC.ConsommationDAL
 
             foreach (Movie m in movies)
             {
-                ProductionCompany pc = companyRepository.Get(m.IdProductionCompagny);
+                ProductionCompany pc = companyRepository.Get(m.IdProductionCompany);
 
                 string movieDuration = (m.Duration != null) ? $"{m.Duration} min" : "Unknown";
                 string movieRelease = m.ReleaseDate?.ToString("dd MMM yyyy") ?? "Unknown";
