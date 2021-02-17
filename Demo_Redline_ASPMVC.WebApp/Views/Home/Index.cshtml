@@ -10,9 +10,16 @@
    <div class="col-md-9">
       <h3>Dernier film ajouté</h3>
       <div>
-         <h4>@movie.Title</h4>
-         <p>@movie.ProductionCompany  @(movie.ReleaseDate?.ToString("d"))</p>
-         <p>@string.Join(", ", movie.Genres)</p>
+         @if (movie != null)
+         {
+            <h4>@movie.Title</h4>
+            <p>@movie.ProductionCompany  @(movie.ReleaseDate?.ToString("d"))</p>
+            <p>@string.Join(", ", movie.Genres)</p>
+         }
+         else
+         {
+            <h4>Aucun film ajouté</h4>
+         }
       </div>
    </div>
    <div class="col-md-3">
