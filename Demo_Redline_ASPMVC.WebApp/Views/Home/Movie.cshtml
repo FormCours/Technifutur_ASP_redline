@@ -7,116 +7,126 @@
    <hr />
 
    <h3>Info</h3>
-   <dl class="dl-horizontal">
-      <dt>
-         @Html.DisplayNameFor(model => model.Movie.Title)
-      </dt>
-      <dd>
-         @Html.DisplayFor(model => model.Movie.Title)
-      </dd>
+   <div class="col-md-6">
+      <dl class="dl-horizontal">
+         <dt>
+            @Html.DisplayNameFor(model => model.Movie.Title)
+         </dt>
+         <dd>
+            @Html.DisplayFor(model => model.Movie.Title)
+         </dd>
 
-      <dt>
-         @Html.DisplayNameFor(model => model.Movie.Genres)
-      </dt>
-      <dd>
-         <ul class="list-unstyled">
-            @foreach (var genre in Model.Movie.Genres)
-            {
-               <li>@genre.Name</li>
-            }
-         </ul>
-      </dd>
+         <dt>
+            @Html.DisplayNameFor(model => model.Movie.Genres)
+         </dt>
+         <dd>
+            <ul class="list-unstyled">
+               @foreach (var genre in Model.Movie.Genres)
+               {
+                  <li>@genre.Name</li>
+               }
+            </ul>
+         </dd>
 
-      <dt>
-         @Html.DisplayName("Notation moyenne")
-      </dt>
-      @if (Model.Ratings.Count() > 0)
+         <dt>
+            @Html.DisplayName("Notation moyenne")
+         </dt>
+         @if (Model.Ratings.Count() > 0)
+         {
+            <dd>@Model.Ratings.Average(r => r.Score).ToString("f2")</dd>
+         }
+         else
+         {
+            <dd>Pas de notation.</dd>
+         }
+
+         <dt>
+            @Html.DisplayNameFor(model => model.Movie.Resume)
+         </dt>
+         <dd>
+            @Html.DisplayFor(model => model.Movie.Resume)
+         </dd>
+
+         <dt>
+            @Html.DisplayNameFor(model => model.Movie.Duration)
+         </dt>
+         <dd>
+            @Html.DisplayFor(model => model.Movie.Duration)
+         </dd>
+
+         <dt>
+            @Html.DisplayNameFor(model => model.Movie.ReleaseDate)
+         </dt>
+         <dd>
+            @Html.DisplayFor(model => model.Movie.ReleaseDate)
+         </dd>
+
+         <dt>
+            @Html.DisplayNameFor(model => model.Movie.ProductionCompany)
+         </dt>
+         <dd>
+            @Html.DisplayFor(model => model.Movie.ProductionCompany)
+         </dd>
+
+      </dl>
+   </div>
+   <div class="col-md-6">
+      @if (Model.Movie.Picture != null)
       {
-         <dd>@Model.Ratings.Average(r => r.Score).ToString("f2")</dd>
+         <img src="@Url.Content(Model.Movie.Picture)" alt="Affiche du film @Model.Movie.Title" height="250" />
+      }
+   </div>
+
+   <div class="col-md-12">
+
+      <h3>Ajouter une notation</h3>
+      @if (SessionHelper.IsLogged)
+      {
+         using (Html.BeginForm("AddRatingMovie", "Home", new { Id = Model.Movie.Id }))
+         {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+               <div class="form-group">
+                  @Html.LabelFor(model => model.NewRating.Score, htmlAttributes: new { @class = "control-label col-md-2" })
+                  <div class="col-md-10">
+                     @Html.EditorFor(model => model.NewRating.Score, new { htmlAttributes = new { @class = "form-control" } })
+                     @Html.ValidationMessageFor(model => model.NewRating.Score, "", new { @class = "text-danger" })
+                  </div>
+               </div>
+
+               <div class="form-group">
+                  @Html.LabelFor(model => model.NewRating.Comment, htmlAttributes: new { @class = "control-label col-md-2" })
+                  <div class="col-md-10">
+                     @Html.EditorFor(model => model.NewRating.Comment, new { htmlAttributes = new { @class = "form-control" } })
+                     @Html.ValidationMessageFor(model => model.NewRating.Comment, "", new { @class = "text-danger" })
+                  </div>
+               </div>
+
+               <div class="form-group">
+                  <div class="col-md-offset-2 col-md-10">
+                     <input type="submit" value="Envoyer la notation" class="btn btn-default" />
+                  </div>
+               </div>
+            </div>
+         }
       }
       else
       {
-         <dd>Pas de notation.</dd>
+         <p>Vous devez être connecté pour ajouter une notation !</p>
       }
 
-      <dt>
-         @Html.DisplayNameFor(model => model.Movie.Resume)
-      </dt>
-      <dd>
-         @Html.DisplayFor(model => model.Movie.Resume)
-      </dd>
-
-      <dt>
-         @Html.DisplayNameFor(model => model.Movie.Duration)
-      </dt>
-      <dd>
-         @Html.DisplayFor(model => model.Movie.Duration)
-      </dd>
-
-      <dt>
-         @Html.DisplayNameFor(model => model.Movie.ReleaseDate)
-      </dt>
-      <dd>
-         @Html.DisplayFor(model => model.Movie.ReleaseDate)
-      </dd>
-
-      <dt>
-         @Html.DisplayNameFor(model => model.Movie.ProductionCompany)
-      </dt>
-      <dd>
-         @Html.DisplayFor(model => model.Movie.ProductionCompany)
-      </dd>
-
-   </dl>
-
-   <h3>Ajouter une notation</h3>
-   @if (SessionHelper.IsLogged)
-   {
-      using (Html.BeginForm("AddRatingMovie", "Home", new { Id = Model.Movie.Id }))
-      {
-         @Html.AntiForgeryToken()
-
-         <div class="form-horizontal">
-            <div class="form-group">
-               @Html.LabelFor(model => model.NewRating.Score, htmlAttributes: new { @class = "control-label col-md-2" })
-               <div class="col-md-10">
-                  @Html.EditorFor(model => model.NewRating.Score, new { htmlAttributes = new { @class = "form-control" } })
-                  @Html.ValidationMessageFor(model => model.NewRating.Score, "", new { @class = "text-danger" })
-               </div>
-            </div>
-
-            <div class="form-group">
-               @Html.LabelFor(model => model.NewRating.Comment, htmlAttributes: new { @class = "control-label col-md-2" })
-               <div class="col-md-10">
-                  @Html.EditorFor(model => model.NewRating.Comment, new { htmlAttributes = new { @class = "form-control" } })
-                  @Html.ValidationMessageFor(model => model.NewRating.Comment, "", new { @class = "text-danger" })
-               </div>
-            </div>
-
-            <div class="form-group">
-               <div class="col-md-offset-2 col-md-10">
-                  <input type="submit" value="Envoyer la notation" class="btn btn-default" />
-               </div>
-            </div>
-         </div>
-      }
-   }
-   else
-   {
-      <p>Vous devez être connecté pour ajouter une notation !</p>
-   }
-
-   <h3>Historique des notations</h3>
-   <ul class="list-group">
-      @foreach (var rating in Model.Ratings)
-      {
-         <li class="list-group-item">
-            <p class="list-group-item-heading">[@Html.DisplayFor(m => rating.Score)] @rating.Member.Pseudo - @Html.DisplayFor(m => rating.RatingDate)</p>
-            <p class="list-group-item-text">@Html.DisplayFor(m => rating.Comment)</p>
-         </li>
-      }
-   </ul>
-
+      <h3>Historique des notations</h3>
+      <ul class="list-group">
+         @foreach (var rating in Model.Ratings)
+         {
+            <li class="list-group-item">
+               <p class="list-group-item-heading">[@Html.DisplayFor(m => rating.Score)] @rating.Member.Pseudo - @Html.DisplayFor(m => rating.RatingDate)</p>
+               <p class="list-group-item-text">@Html.DisplayFor(m => rating.Comment)</p>
+            </li>
+         }
+      </ul>
+   </div>
 </div>
 <p>
    @Html.ActionLink("Back to List", "Movies")

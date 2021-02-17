@@ -34,5 +34,8 @@ namespace Demo_Redline_ASPMVC.WebApp.Models
 
         [Display(Name ="Genre")]
         public List<Genre> Genres { get; set; }
+
+        [Display(Name= "Affiche")]
+        public string Picture { get; set; }
     }
 }

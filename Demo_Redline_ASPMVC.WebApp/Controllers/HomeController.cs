@@ -4,8 +4,10 @@ using Demo_Redline_ASPMVC.WebApp.ServicesData;
 using Demo_Redline_ASPMVC.WebApp.Session;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
+using System.Web.Hosting;
 using System.Web.Mvc;
 
 namespace Demo_Redline_ASPMVC.WebApp.Controllers
@@ -59,6 +61,18 @@ namespace Demo_Redline_ASPMVC.WebApp.Controllers
             {
                 Genre g = movieVM.Genres.Single(elem => elem.Id == id);
                 movieVM.NewMovie.Genres.Add(g);
+            }
+
+            // Save image in Disk
+            if (movieVM.MovieImage != null)
+            {
+                string fileExt = Path.GetExtension(movieVM.MovieImage.FileName);
+                string internalName = "~/Images/" + Guid.NewGuid().ToString() + fileExt;
+
+                string realSavePath = HostingEnvironment.MapPath(internalName);
+                movieVM.MovieImage.SaveAs(realSavePath);
+
+                movieVM.NewMovie.Picture = internalName;
             }
 
             // Save in DB !!!!

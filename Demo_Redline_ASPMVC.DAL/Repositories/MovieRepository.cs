@@ -44,13 +44,14 @@ namespace Demo_Redline_ASPMVC.DAL.Repositories
 
         public override Movie Insert(Movie entity)
         {
-            QueryDB query = new QueryDB("INSERT INTO Movie ([Title],[Resume],[Duration],[ReleaseDate],[Id_ProductionCompany]) " +
-                                        "OUTPUT inserted.* VALUES (@title, @resume, @duration, @relasedate, @idProductionCompagny)");
+            QueryDB query = new QueryDB("INSERT INTO Movie ([Title],[Resume],[Duration],[ReleaseDate],[Id_ProductionCompany], [Picture]) " +
+                                        "OUTPUT inserted.* VALUES (@title, @resume, @duration, @relasedate, @idProductionCompagny, @Picture)");
             query.AddParametre("@title", entity.Title);
             query.AddParametre("@resume", entity.Resume);
             query.AddParametre("@duration", entity.Duration);
             query.AddParametre("@relasedate", entity.ReleaseDate);
             query.AddParametre("@idProductionCompagny", entity.IdProductionCompany);
+            query.AddParametre("@Picture", entity.Picture);
 
             return Connector.ExecuteReader(query, ConvertReaderToEntity).SingleOrDefault();
         }
@@ -58,7 +59,7 @@ namespace Demo_Redline_ASPMVC.DAL.Repositories
         public override Movie Update(long key, Movie entity)
         {
             QueryDB query = new QueryDB("UPDATE Movie " +
-                                        "SET [Title] = @title, [Resume] = @resume, [Duration] = @duration, [ReleaseDate] = @relasedate, [Id_ProductionCompany] = @idProductionCompagny" +
+                                        "SET [Title] = @title, [Resume] = @resume, [Duration] = @duration, [ReleaseDate] = @relasedate, [Id_ProductionCompany] = @idProductionCompagny, [Picture] = @Picture" +
                                         " OUTPUT inserted.* WHERE Id_Movie = @Id");
             query.AddParametre("@Id", key);
             query.AddParametre("@title", entity.Title);
@@ -66,6 +67,7 @@ namespace Demo_Redline_ASPMVC.DAL.Repositories
             query.AddParametre("@duration", entity.Duration);
             query.AddParametre("@relasedate", entity.ReleaseDate);
             query.AddParametre("@idProductionCompagny", entity.IdProductionCompany);
+            query.AddParametre("@Picture", entity.Picture);
 
             return Connector.ExecuteReader(query, ConvertReaderToEntity).SingleOrDefault();
         }
@@ -78,8 +80,9 @@ namespace Demo_Redline_ASPMVC.DAL.Repositories
                 (dataReader["Resume"] is DBNull) ? null : dataReader["Resume"].ToString(),
                 (dataReader["Duration"] is DBNull) ? null : (int?)Convert.ToInt32(dataReader["Duration"]),
                 (dataReader["ReleaseDate"] is DBNull) ? null : (DateTime?)Convert.ToDateTime(dataReader["ReleaseDate"]),
-                (long)dataReader["Id_ProductionCompany"]
-            );
+                (long)dataReader["Id_ProductionCompany"],
+                (dataReader["Picture"] is DBNull) ? null : dataReader["Picture"].ToString()
+            ) ;
         }
     }
 }

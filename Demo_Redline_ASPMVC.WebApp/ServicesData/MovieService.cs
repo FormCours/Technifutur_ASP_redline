@@ -67,7 +67,8 @@ namespace Demo_Redline_ASPMVC.WebApp.ServicesData
                 movie.Resume,
                 movie.Duration,
                 movie.ReleaseDate,
-                companyDB.Id
+                companyDB.Id,
+                movie.Picture
             );
             DAL.Entities.Movie movieDB = movieRepository.Insert(newMovie);
 

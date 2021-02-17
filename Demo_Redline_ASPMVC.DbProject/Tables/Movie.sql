@@ -6,6 +6,7 @@
 	[Duration] INT,
 	[ReleaseDate] DATE,
 	[Id_ProductionCompany] BIGINT NOT NULL,
+	[Picture] VARCHAR(50), 
 	CONSTRAINT [PK_Movie] PRIMARY KEY([Id_Movie]),
 	CONSTRAINT [FK_Movie_ProductionCompany]
 	  FOREIGN KEY([Id_ProductionCompany]) REFERENCES [ProductionCompany]([Id_ProductionCompany])

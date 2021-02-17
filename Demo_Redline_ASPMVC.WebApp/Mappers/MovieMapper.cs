@@ -28,7 +28,8 @@ namespace Demo_Redline_ASPMVC.WebApp.Mappers
                 Duration = global.Duration,
                 ReleaseDate = global.ReleaseDate,
                 ProductionCompany = company,
-                Genres= genres
+                Genres= genres,
+                Picture = global.Picture
             };
         }
     }

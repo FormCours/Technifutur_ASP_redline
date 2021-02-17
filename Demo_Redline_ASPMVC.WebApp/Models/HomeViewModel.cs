@@ -19,6 +19,8 @@ namespace Demo_Redline_ASPMVC.WebApp.Models
 
         public Movie NewMovie { get; set; }
         public List<int> SelectedGenre { get; set; }
+
+        public HttpPostedFileBase MovieImage { get; set; }
     }
 
 
