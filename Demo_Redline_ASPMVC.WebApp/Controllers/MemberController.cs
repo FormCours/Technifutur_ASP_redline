@@ -13,6 +13,11 @@ namespace Demo_Redline_ASPMVC.WebApp.Controllers
     {
         public ActionResult Register()
         {
+            if(SessionHelper.IsLogged)
+            {
+                throw new HttpException(400, "Is logged");
+            }
+
             return View(new MemberRegister());
         }
 
@@ -48,6 +53,11 @@ namespace Demo_Redline_ASPMVC.WebApp.Controllers
 
         public ActionResult Login()
         {
+            if (SessionHelper.IsLogged)
+            {
+                throw new HttpException(400, "Is logged");
+            }
+
             return View(new MemberLogin());
         }
 

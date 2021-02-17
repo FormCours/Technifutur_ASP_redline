@@ -85,14 +85,16 @@ namespace Demo_Redline_ASPMVC.WebApp.Controllers
         {
             if(id == null)
             {
-                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest, "Missing movie id !");
+                throw new HttpException(400, "Missing movie id !");
+                //return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest, "Missing movie id !");
             }
 
             Movie movie = MovieService.Instance.Get((long)id);
 
             if(movie == null)
             {
-                return HttpNotFound();
+                throw new HttpException(404, "Not found");
+                //return HttpNotFound();
             }
 
             IEnumerable<Rating> ratings = RatingService.Instance.GetByMovie((long)id);
@@ -114,7 +116,8 @@ namespace Demo_Redline_ASPMVC.WebApp.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest, "Fail for the rating !");
+                throw new HttpException(400, "Fail for the rating !");
+                //return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest, "Fail for the rating !");
             }
 
             if(!ModelState.IsValid)
