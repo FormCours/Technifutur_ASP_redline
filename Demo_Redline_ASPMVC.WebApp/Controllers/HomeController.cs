@@ -57,10 +57,13 @@ namespace Demo_Redline_ASPMVC.WebApp.Controllers
 
             // Add genre in Movie
             movieVM.NewMovie.Genres = new List<Genre>();
-            foreach (int id in movieVM.SelectedGenre)
+            if (movieVM.SelectedGenre != null)
             {
-                Genre g = movieVM.Genres.Single(elem => elem.Id == id);
-                movieVM.NewMovie.Genres.Add(g);
+                foreach (int id in movieVM.SelectedGenre)
+                {
+                    Genre g = movieVM.Genres.Single(elem => elem.Id == id);
+                    movieVM.NewMovie.Genres.Add(g);
+                }
             }
 
             // Save image in Disk
