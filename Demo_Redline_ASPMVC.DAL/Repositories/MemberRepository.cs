@@ -34,10 +34,10 @@ namespace Demo_Redline_ASPMVC.DAL.Repositories
         /// <returns></returns>
         public Member GetByCredential(string login, String password)
         {
-            // TODO : Utiliser une procedure stockée qui obtient le membre sur base du mot de passe hashé en base de donnée
-            QueryDB query = new QueryDB("SELECT * FROM Member WHERE (Email LIKE @login OR Pseudo LIKE @login) AND Password LIKE @pwd");
+            // Utilisation d'une procedure stockée qui obtient le membre sur base du mot de passe hashé en base de donnée
+            QueryDB query = new QueryDB("LoginMember", true);
             query.AddParametre("@login", login);
-            query.AddParametre("@pwd", password);
+            query.AddParametre("@Password", password);
 
             return Connector.ExecuteReader(query, ConvertReaderToEntity).SingleOrDefault();
         }
@@ -60,20 +60,11 @@ namespace Demo_Redline_ASPMVC.DAL.Repositories
 
         public override Member Insert(Member entity)
         {
-            //QueryDB queryRole = new QueryDB("SELECT id FROM [Role] WHERE Name = 'Member'");
-            //long idRoleMember = (long)Connector.ExecuteScalar(queryRole);
-
-            RoleRepository r = new RoleRepository();
-            long idRoleMember = r.GetAll().Single(role => role.Name == "Member").Id;
-
-
-            // TODO : Utiliser une procedure stockée qui hash le mot de passe dans la base de donnée
-            QueryDB query = new QueryDB("INSERT INTO Member ([Pseudo],[Email],[Password],[Id_Role]) " +
-                                        "OUTPUT inserted.* VALUES (@pseudo, @email, @pwd, @idRole)");
-            query.AddParametre("@pseudo", entity.Pseudo);
-            query.AddParametre("@email", entity.Email);
-            query.AddParametre("@pwd", entity.Password);
-            query.AddParametre("@idRole", idRoleMember);
+            // Utilisation d'une procedure stockée qui hash le mot de passe dans la base de donnée
+            QueryDB query = new QueryDB("AddMember", true);
+            query.AddParametre("@Pseudo", entity.Pseudo);
+            query.AddParametre("@Email", entity.Email);
+            query.AddParametre("@Password", entity.Password);
 
             return Connector.ExecuteReader(query, ConvertReaderToEntity).SingleOrDefault();
         }
